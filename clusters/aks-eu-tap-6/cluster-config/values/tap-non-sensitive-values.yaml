@@ -1,0 +1,87 @@
+profile: full
+shared:
+  ingress_domain: tap152.tanzu.moussaud.org  
+ceip_policy_disclosed: true
+excluded_packages:
+- learningcenter.tanzu.vmware.com
+- workshops.learningcenter.tanzu.vmware.com
+- policy.apps.tanzu.vmware.com
+- image-policy-webhook.signing.apps.tanzu.vmware.com
+ootb_templates:
+  excluded_templates:
+  - convention-template
+accelerator:
+  ingress:
+    include: true
+    issuer: letsencrypt-http01-issuer
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+supply_chain: basic
+ootb_supply_chain_basic:
+  carvel_package:
+    workflow_enabled: true
+    name_suffix: pkg.mytanzu.xyz
+  registry:
+    server: akseutap6registry.azurecr.io
+    repository: library/tanzu-supply-chain
+  gitops:
+    ssh_secret: ""
+    server_address: https://github.com/
+    repository_owner: bmoussaud
+    repository_name: micropets-app-gitops
+tap_gui:
+  metadataStoreAutoconfiguration: true  
+  app_config:
+    customize:      
+      custom_name: The Benoit TAP Version.1.5.2 (SOPS)
+    organization:
+      name: MicroPets Corp IT Department    
+    catalog:
+      locations:
+      - type: url
+        target: https://github.com/bmoussaud/micropets-app/blob/master/catalog-info.yaml
+      - type: url
+        target: https://github.com/bmoussaud/micropets-cats-golang/blob/main/catalog-component.yaml
+metadata_store:
+  ns_for_export_app_cert: '*'
+  app_service_type: ClusterIP
+scanning:
+  metadataStore:
+    url: ""
+namespace_provisioner:
+  controller: false
+  default_parameters:
+    limits:
+      default:
+        cpu: 1700m
+        memory: 1500Mi
+      defaultRequest:
+        cpu: 100m
+        memory: 500Mi
+  gitops_install:
+    ref: origin/main
+    subPath: applications/namespaces/current
+    url: https://github.com/bmoussaud/micropets-app-gitops.git
+  additional_sources:
+  - git:
+      ref: origin/main
+      subPath: namespace-provisioner/custom-resources/workload-sa
+      url: https://github.com/bmoussaud/micropets-app-operator.git
+    path: _ytt_lib/workload-sa
+  - git:
+      ref: origin/main
+      subPath: namespace-provisioner/custom-resources/test-pipeline
+      url: https://github.com/bmoussaud/micropets-app-operator.git
+    path: _ytt_lib/test-pipeline
+  - git:
+      ref: origin/main
+      subPath: namespace-provisioner/custom-resources/scanpolicies
+      url: https://github.com/bmoussaud/micropets-app-operator.git
+    path: _ytt_lib/scanpolicies
+  - git:
+      ref: origin/main
+      subPath: namespace-provisioner/custom-resources/overlays
+      url: https://github.com/bmoussaud/micropets-app-operator.git
+    path: _ytt_lib/customize
