@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: postgres-operator.sql.tanzu.vmware.com
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/change-group: pkg/pgsql
+    kapp.k14s.io/change-rule.0: "upsert after upserting pkgr/tds"    
+    kapp.k14s.io/change-rule.2: "delete before deleting pkgr/tds"
+spec:
+  serviceAccountName: tap-default-sa
+  packageRef:
+    refName: postgres-operator.sql.tanzu.vmware.com
+    #! Version is unconstrained because:
+    #! ==> Use the version included in the TDS PackageRepository
+    versionSelection: {}
