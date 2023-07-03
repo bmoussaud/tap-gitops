@@ -10,7 +10,7 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgr/tds"    
     kapp.k14s.io/change-rule.2: "delete before deleting pkgr/tds"
 spec:
-  serviceAccountName: tap-default-sa
+  serviceAccountName: tap-installer-sa
   packageRef:
     refName: postgres-operator.sql.tanzu.vmware.com
     #! Version is unconstrained because:
