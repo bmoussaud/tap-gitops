@@ -11,8 +11,8 @@ metadata:
     kapp.k14s.io/change-group: pkg/eso
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgr"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgr"
-spec:
-  serviceAccountName: tap-default-sa
+spec:  
+  serviceAccountName: tap-installer-sa
   packageRef:
     refName: external-secrets.apps.tanzu.vmware.com
     #! Version is unconstrained because:
