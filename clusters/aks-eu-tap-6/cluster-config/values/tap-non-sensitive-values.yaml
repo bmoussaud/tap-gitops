@@ -53,7 +53,9 @@ tap_install:
       metadataStore:
         url: ""
     namespace_provisioner:
-      controller: false
+      controller: true
+      parameter_prefixes:
+      - tap.tanzu.vmware.com
       default_parameters:
         limits:
           default:
