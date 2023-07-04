@@ -61,11 +61,7 @@ tap_install:
             memory: 1500Mi
           defaultRequest:
             cpu: 100m
-            memory: 500Mi
-      gitops_install:
-        ref: origin/main
-        subPath: applications/namespaces/current
-        url: https://github.com/bmoussaud/micropets-app-gitops.git
+            memory: 500Mi      
       additional_sources:
       - git:
           ref: origin/main
