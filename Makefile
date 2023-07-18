@@ -2,6 +2,9 @@ SOPS_AGE_KEY_FILE=~/.dotconfig/tapkey.txt
 CLUSTER_NAME=aks-eu-tap-6
 REGISTRY_NAME=$(shell echo $(subst -,,$(CLUSTER_NAME)-Registry) | tr '[:upper:]' '[:lower:]') 
 
+new-instance:
+	./setup-repo.sh $(CLUSTER_NAME) sops
+
 encrypt:
 	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
 
