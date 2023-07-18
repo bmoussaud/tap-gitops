@@ -6,18 +6,21 @@ new-instance:
 	./setup-repo.sh $(CLUSTER_NAME) sops
 	touch clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml
 	touch clusters/$(CLUSTER_NAME)/cluster-config/values/tap-non-sensitive-values.yaml
-	
+
+configure:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME) && ./tanzu-sync/scripts/configure.sh
+
+gen-sensitive-values:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ./gen-sensitive-values.sh
+
 encrypt:
-	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME)  && sops --encrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
 
 decrypt:
 	export SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) && sops --decrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
 
-configure:	
-	./configure.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME)
-	
 deploy:	
-	./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) && cd ./clusters/${CLUSTER_NAME}/ && ./tanzu-sync/scripts/deploy.sh
+	./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME)/ && ./tanzu-sync/scripts/deploy.sh
 
 undeploy:
 	kapp delete -a tanzu-sync
@@ -28,4 +31,3 @@ encrypt-secret-store:
 apply-secret-store:
 	kubectl apply -f  ~/.azure/rbac/vault-micropets.yaml 
 
-gen-sensitive-values:
