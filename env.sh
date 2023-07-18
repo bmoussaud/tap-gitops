@@ -1,5 +1,5 @@
 source ~/.kube/acr/.${1}.config
-export GIT_SSH_PRIVATE_KEY=$(cat ~/.dotconfig/.ssh/github_rsa)
+export GIT_SSH_PRIVATE_KEY=$(cat ~/.dotconfig/.ssh/id_rsa)
 export GIT_KNOWN_HOSTS=$(ssh-keyscan github.com)
 export SOPS_AGE_KEY=$(cat ${2})
 export SOPS_AGE_KEY_FILE=${2}
