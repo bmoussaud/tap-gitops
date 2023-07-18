@@ -68,7 +68,7 @@ tap_install:
       - git:
           ref: origin/main
           subPath: namespace-provisioner/custom-resources/workload-sa
-          url:  
+          url: https://github.com/bmoussaud/micropets-app-operator.git
         path: _ytt_lib/workload-sa
       - git:
           ref: origin/main
