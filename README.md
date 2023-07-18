@@ -6,3 +6,10 @@ This reference implementation is pre-configured to install Tanzu Application Pla
 
 For detailed documentation, refer to [VMware Tanzu Application Platform Product Documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/install-gitops-intro.html).
 
+````
+make new-instance
+make configure
+make gen-sensitive-values encrypt
+make deploy
+make tap-update-dns tap-gui-ip
+``

@@ -25,9 +25,16 @@ deploy:
 undeploy:
 	kapp delete -a tanzu-sync
 
+
+tap-gui-ip:
+	IP=$(shell kubectl get HTTPProxy  -n tap-gui tap-gui -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
+	FQDN=$(shell kubectl get HTTPProxy  -n tap-gui tap-gui -o=jsonpath='{.spec.virtualhost.fqdn}')
+	
+tap-update-dns:
+	./update_tap_dns.sh
+
 encrypt-secret-store:
 	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt  --encrypted-regex '^(data|stringData|tenantId)$$' ~/.azure/rbac/vault-micropets.yaml >  clusters/$(CLUSTER_NAME)/cluster-config/values/cluster-secret-store.yaml
 
 apply-secret-store:
 	kubectl apply -f  ~/.azure/rbac/vault-micropets.yaml 
-
