@@ -36,4 +36,4 @@ spec:
             tap_gui:
               app_config:
                 organization:
-                  name: #@ "BENOIT MicroPets Corp IT Department by SOPS.{}".format(data.values.tap_install.version.package_version)
+                  name: #@ "BENOIT MicroPets Corp IT Department by SOPS .{}".format("#.3.4")
