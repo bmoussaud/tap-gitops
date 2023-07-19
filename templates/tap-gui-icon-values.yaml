@@ -1,0 +1,12 @@
+#@ load("@ytt:yaml", "yaml")
+#@ load("@ytt:data", "data")
+---
+tap_install:
+  values:
+    tap_gui:
+      app_config:
+        organization:
+          name: #@ "MicroPets Corp IT Department (GitOps SOPS) {}".format(data.values.tap_install.version.package_version)
+        customize:
+          custom_logo: #@ data.values.ICON_BASE64
+          custom_name: #@ "TAP Version.{}".format(data.values.tap_install.version.package_version)
