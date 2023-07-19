@@ -43,11 +43,7 @@ tap_install:
     
     tap_gui:
       metadataStoreAutoconfiguration: true  
-      app_config:
-        customize:      
-          custom_name: The Benoit TAP Version.1.5.2.1 (SOPS)
-        organization:
-          name: MicroPets Corp IT Department by SOPS 1.5.4
+      app_config:        
         catalog:
           locations:
           - type: url

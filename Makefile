@@ -9,8 +9,14 @@ new-instance:
 configure:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME) && ./tanzu-sync/scripts/configure.sh
 
+generate: gen-sensitive-values gen-tap-gui-icon-values
+
 gen-sensitive-values:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ./gen-sensitive-values.sh
+
+gen-tap-gui-icon-values:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ./gen-tap-gui-icon-values.sh
+
 
 encrypt:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME)  && sops --encrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml

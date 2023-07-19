@@ -9,7 +9,7 @@ For detailed documentation, refer to [VMware Tanzu Application Platform Product 
 ````
 make new-instance
 make configure
-make gen-sensitive-values encrypt
+make generate encrypt
 make deploy
 make tap-update-dns tap-gui-ip
 ``
