@@ -8,8 +8,8 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: pkgi
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgr"
-    kapp.k14s.io/change-rule.1: "delete before deleting pkgr"    
-    ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: tap-install-overlay-secret
+    kapp.k14s.io/change-rule.1: "delete before deleting pkgr"
+    benoit.ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: benoit-tap-install-overlay-secret
 spec:
   serviceAccountName: tap-installer-sa
   packageRef:
@@ -21,3 +21,19 @@ spec:
         name: tap-values
     - secretRef:
         name: tap-sensitive-values
+  ignoreUnknownComments: true
+  inline:
+    paths:
+      overlay-1.yaml: |
+        #@ load("@ytt:overlay", "overlay")
+        #@ load("@ytt:data", "data")
+        #@overlay/match by=overlay.all, expects="1+"
+        ---
+        tap_install:
+          #@overlay/match missing_ok=True
+          values:
+            #@overlay/match missing_ok=True
+            tap_gui:
+              app_config:
+                organization:
+                  name: #@ "BENOIT MicroPets Corp IT Department by SOPS.{}".format(data.values.tap_install.version.package_version)
