@@ -27,7 +27,7 @@ tap_install:
           type: LoadBalancer
     
     supply_chain: basic
-    
+
     ootb_supply_chain_basic:
       carvel_package:
         workflow_enabled: true
@@ -47,7 +47,7 @@ tap_install:
         customize:      
           custom_name: The Benoit TAP Version.1.5.2.1 (SOPS)
         organization:
-          name: MicroPets Corp IT Department by SOPS  1.5.1
+          name: MicroPets Corp IT Department by SOPS 1.5.22222
         catalog:
           locations:
           - type: url
