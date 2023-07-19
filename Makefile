@@ -9,13 +9,13 @@ new-instance:
 configure:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME) && ./tanzu-sync/scripts/configure.sh
 
-generate: gen-sensitive-values gen-tap-gui-icon-values
+generate: gen-sensitive-values gen-tap-gui-icon-values encrypt
 
 gen-sensitive-values:
-	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ./gen-sensitive-values.sh
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ytt -f templates/tap-sensitive-values.yaml --data-values-env INSTALL_REGISTRY > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml 
 
 gen-tap-gui-icon-values:
-	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ./gen-tap-gui-icon-values.sh
+	TAP_ICON_BASE64=$(shell base64 -i clusters/$(CLUSTER_NAME)/cluster-config/tap-logo.png) ytt -f templates/tap-gui-icon-values.yaml --data-values-file clusters/$(CLUSTER_NAME)/cluster-config/values/tap-install-values.yaml --data-values-env TAP > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-gui-icon-values.yaml
 
 encrypt:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME)  && sops --encrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml

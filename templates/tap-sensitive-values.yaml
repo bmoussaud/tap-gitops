@@ -1,0 +1,9 @@
+#@ load("@ytt:data", "data")
+---
+tap_install:
+  sensitive_values:
+    shared:
+      image_registry:
+        project_path: #@ "{}/library/tanzu-build-service".format(data.values.HOSTNAME)
+        username: #@ data.values.USERNAME
+        password: #@ data.values.PASSWORD
