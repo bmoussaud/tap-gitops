@@ -1,0 +1,8 @@
+#@ load("@ytt:data", "data")
+---
+tap_install:
+  package_repository:
+    oci_repository: #@ "{}/tanzu-application-platform/tap-packages".format(data.values.HOSTNAME)
+  version:
+    package_repo_bundle_tag: #@ data.values.VERSION
+    package_version: #@ data.values.VERSION
