@@ -8,7 +8,8 @@ metadata:
   annotations:
     kapp.k14s.io/change-group: pkgi
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgr"
-    kapp.k14s.io/change-rule.1: "delete before deleting pkgr"        
+    kapp.k14s.io/change-rule.1: "delete before deleting pkgr"    
+    ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: tap-install-overlay-secret
 spec:
   serviceAccountName: tap-installer-sa
   packageRef:
