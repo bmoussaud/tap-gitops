@@ -43,6 +43,8 @@ tap_install:
     
     tap_gui:
       metadataStoreAutoconfiguration: true  
+      auth:
+        allowGuestAccess: true 
       app_config:        
         catalog:
           locations:
