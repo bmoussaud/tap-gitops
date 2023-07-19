@@ -3,8 +3,7 @@ CLUSTER_NAME=aks-eu-tap-6
 REGISTRY_NAME=$(shell echo $(subst -,,$(CLUSTER_NAME)-Registry) | tr '[:upper:]' '[:lower:]') 
 
 new-instance:
-	./setup-repo.sh $(CLUSTER_NAME) sops
-	touch clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml
+	./setup-repo.sh $(CLUSTER_NAME) sops	
 	touch clusters/$(CLUSTER_NAME)/cluster-config/values/tap-non-sensitive-values.yaml
 
 configure:
