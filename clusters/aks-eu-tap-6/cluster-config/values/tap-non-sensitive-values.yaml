@@ -47,7 +47,7 @@ tap_install:
         customize:      
           custom_name: The Benoit TAP Version.1.5.2.1 (SOPS)
         organization:
-          name: MicroPets Corp IT Department by SOPS 1.5.22222
+          name: MicroPets Corp IT Department by SOPS 1.5.4
         catalog:
           locations:
           - type: url

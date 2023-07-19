@@ -25,7 +25,7 @@ undeploy:
 	kapp delete -a tanzu-sync
 
 kick:
-	kctrl app kick -a sync -n tanzu-sync -yes
+	kctrl app kick -a sync -n tanzu-sync -y
 
 tap-gui-ip:
 	IP=$(shell kubectl get HTTPProxy  -n tap-gui tap-gui -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
