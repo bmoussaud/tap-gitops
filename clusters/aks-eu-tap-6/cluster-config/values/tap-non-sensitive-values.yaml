@@ -27,6 +27,7 @@ tap_install:
           type: LoadBalancer
     
     supply_chain: basic
+    
     ootb_supply_chain_basic:
       carvel_package:
         workflow_enabled: true
