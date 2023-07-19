@@ -2,7 +2,7 @@ tap_install:
   values:
     profile: full
     shared:
-      ingress_domain: tap153.tanzu.moussaud.org  
+      ingress_domain: tap154.tanzu.moussaud.org  
 
     ceip_policy_disclosed: true
     
