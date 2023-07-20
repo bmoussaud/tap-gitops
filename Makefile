@@ -22,7 +22,7 @@ gen-tap-gui-icon-values:
 	TAP_ICON_BASE64=$(shell base64 -i clusters/$(CLUSTER_NAME)/cluster-config/tap-logo.png) ytt -f templates/tap-gui-icon-values.yaml --data-values-file clusters/$(CLUSTER_NAME)/cluster-config/values/tap-install-values.yaml --data-values-env TAP > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-gui-icon-values.yaml
 
 encrypt:
-	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME)  && sops --encrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
+	find clusters/$(CLUSTER_NAME) -name "*-sensitive.yaml" -exec ./encrypt_sops.sh {} \;
 
 decrypt:
 	export SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) && sops --decrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
