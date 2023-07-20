@@ -1,0 +1,11 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  name: tds-pkgr
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/change-group: pkgr
+spec:
+  fetch:
+    imgpkgBundle:      
+      image: #@ "{}/packages-for-vmware-tanzu-data-services/tds-packages:{}".format("akseutap6registry.azurecr.io", "1.6.0")
