@@ -1,0 +1,19 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: cluster-azure-backend
+spec:
+  provider:
+    azurekv:
+      tenantId: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
+      vaultUrl: https://vault-micropets.vault.azure.net
+      authSecretRef:
+        clientId:
+          name: azure-secret-sp
+          namespace: external-secrets
+          key: ClientID
+        clientSecret:
+          name: azure-secret-sp
+          namespace: external-secrets
+          key: ClientSecret
+---
