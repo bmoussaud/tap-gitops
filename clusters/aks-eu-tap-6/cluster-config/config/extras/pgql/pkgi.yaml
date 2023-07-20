@@ -6,9 +6,9 @@ metadata:
   name: postgres-operator.sql.tanzu.vmware.com
   namespace: tap-install
   annotations:
-    kapp.k14s.io/change-group: pkgi
-    kapp.k14s.io/change-rule.0: "upsert after upserting pkgr"
-    kapp.k14s.io/change-rule.1: "delete before deleting pkgr"
+    kapp.k14s.io/change-group: pkgi/extra
+    kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
+    kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
 spec:
   serviceAccountName: tap-installer-sa
   packageRef:
