@@ -6,7 +6,7 @@ metadata:
 stringData:
   patch.yml: |
     #@ load("@ytt:overlay", "overlay")
-    #@overlay/match by=overlay.subset({"kind":"ClusterTask", "metadata": {"name": "git-writer"}}),expects="1+"
+    #@overlay/match by=overlay.subset({"kind":"ClusterTask", "metadata": {"name": "git-writer"}}),expects="0+"
     ---
     spec:
       steps:
