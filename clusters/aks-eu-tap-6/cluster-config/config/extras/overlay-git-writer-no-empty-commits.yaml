@@ -15,10 +15,10 @@ stringData:
         #@overlay/replace via=lambda left, right: right
         script: |
           #!/usr/bin/env bash
-          echo "------ DEBUG BENOIT git-clone-and-push ----"
-          echo "------ DEBUG BENOIT git-clone-and-push ----"
-          echo "------ DEBUG BENOIT git-clone-and-push ----"
-          echo "------ DEBUG BENOIT git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 2 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 2 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 2 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 2 git-clone-and-push ----"
 
           set -o errexit
           set -o xtrace
