@@ -75,8 +75,7 @@ tap_install:
           secrets:           
             - app-registry
             - git-ssh
-            - registries-credentials
-            - benoit
+            - registries-credentials            
           imagePullSecrets:
             - app-registry
             - tap-registry
