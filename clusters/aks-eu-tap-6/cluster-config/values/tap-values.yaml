@@ -1,10 +1,10 @@
 tap_install:
   values:
     profile: full
-    package_overlays:
-      - name: ootb-templates
-        secrets:
-          - name: git-writer-no-empty-commits-debug
+    #! package_overlays:
+    #!  - name: ootb-templates
+    #!    secrets:
+    #!      - name: git-writer-no-empty-commits-debug
 
     shared:
       ingress_domain: tap16.tanzu.moussaud.org
@@ -70,7 +70,11 @@ tap_install:
       controller: true
       parameter_prefixes:
         - tap.tanzu.vmware.com
-      default_parameters:
+      default_parameters:        
+        supply_chain_service_account: 
+          secrets:
+          - gitbenoit
+          imagePullSecrets: [] #! optional
         limits:
           default:
             cpu: 1700m
