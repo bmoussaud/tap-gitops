@@ -15,7 +15,8 @@ tap_install:
       - learningcenter.tanzu.vmware.com
       - workshops.learningcenter.tanzu.vmware.com
       - policy.apps.tanzu.vmware.com
-      - image-policy-webhook.signing.apps.tanzu.vmware.com
+      - image-policy-webhook.signingappliveview-connector
+      - appliveview-connector.appliveview-connector
 
     ootb_templates:
       excluded_templates:
