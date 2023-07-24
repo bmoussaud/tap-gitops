@@ -1,6 +1,11 @@
 tap_install:
   values:
     profile: full
+    package_overlays:
+      - name: ootb-templates
+        secrets:
+          - name: git-writer-no-empty-commits-debug
+
     shared:
       ingress_domain: tap16.tanzu.moussaud.org
 
