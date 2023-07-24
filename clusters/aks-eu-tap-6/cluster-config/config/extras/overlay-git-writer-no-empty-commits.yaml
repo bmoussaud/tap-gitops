@@ -11,14 +11,15 @@ stringData:
     spec:
       steps:
       #@overlay/match by="name", expects="1+"
-      - name: git-clone-and-push
+      - serviceAccountName: workload-sa
+        name: git-clone-and-push
         #@overlay/replace via=lambda left, right: right
         script: |
           #!/usr/bin/env bash
-          echo "------ DEBUG BENOIT 3 git-clone-and-push ----"
-          echo "------ DEBUG BENOIT 3 git-clone-and-push ----"
-          echo "------ DEBUG BENOIT 3 git-clone-and-push ----"
-          echo "------ DEBUG BENOIT 3 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 4 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 4 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 4 git-clone-and-push ----"
+          echo "------ DEBUG BENOIT 4 git-clone-and-push ----"
 
           set -o errexit
           set -o xtrace
