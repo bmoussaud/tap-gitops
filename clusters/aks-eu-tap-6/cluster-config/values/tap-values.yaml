@@ -70,11 +70,16 @@ tap_install:
       controller: true
       parameter_prefixes:
         - tap.tanzu.vmware.com
-      default_parameters:        
-        supply_chain_service_account: 
-          secrets:
-          - gitbenoit
-          imagePullSecrets: [] #! optional
+      default_parameters:
+        supply_chain_service_account:
+          secrets:           
+            - app-registry
+            - git-ssh
+            - registries-credentials
+            - benoit
+          imagePullSecrets:
+            - app-registry
+            - tap-registry
         limits:
           default:
             cpu: 1700m
