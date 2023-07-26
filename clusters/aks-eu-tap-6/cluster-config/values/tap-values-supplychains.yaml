@@ -1,10 +1,9 @@
 tap_install:
   values:
-  
     ootb_templates:
       excluded_templates:
         - convention-template
-    
+
     supply_chain: basic
 
     #! supply_chain basic
@@ -41,4 +40,22 @@ tap_install:
         - cluster_config_template_name: secured-config-template
           type: secured-web
 
-    
+    #! supply_chain testing_scanning
+    ootb_supply_chain_testing_scanning:
+      registry:
+        server: akseutap6registry.azurecr.io
+        repository: library/tanzu-supply-chain
+      gitops:
+        ssh_secret: ""
+        server_address: https://github.com/
+        repository_owner: bmoussaud
+        repository_name: micropets-app-gitops
+      supported_workloads:
+        - cluster_config_template_name: config-template
+          type: web
+        - cluster_config_template_name: server-template
+          type: server
+        - cluster_config_template_name: worker-template
+          type: worker
+        - cluster_config_template_name: secured-config-template
+          type: secured-web
