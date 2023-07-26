@@ -6,7 +6,7 @@ tap_install:
 
     supply_chain: basic
 
-    #! supply_chain basic
+    #! supply_chain testing
     ootb_supply_chain_basic:
       carvel_package:
         workflow_enabled: true
