@@ -14,4 +14,4 @@ echo "IP:           ${IP}"
 set -x 
 az network dns record-set a delete -g moussaud.org -z ${SUFFIX_DNS} -n "*.${TAP_INSTANCE}" -y
 az network dns record-set a create -g moussaud.org -z ${SUFFIX_DNS} -n "*.${TAP_INSTANCE}" --metadata owner=tanzu
-az network dns record-set a add-record  -g moussaud.org -z ${SUFFIX_DNS} -n "*.${TAP_INSTANCE}" -a ${IP}
+az network dns record-set a add-record  -g moussaud.org -z ${SUFFIX_DNS} -n "*.${TAP_INSTANCE}" -a ${IP} --ttl 10
