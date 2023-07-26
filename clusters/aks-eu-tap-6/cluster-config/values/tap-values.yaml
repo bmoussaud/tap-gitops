@@ -46,9 +46,11 @@ tap_install:
         repository_owner: bmoussaud
         repository_name: micropets-app-gitops
 
+    #! Inprogres, need to setup a wild card dnds
     #! https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
-    cnrs:
-      ingress_issuer: "letsencrypt-http01-issuer"
+    #!cnrs:
+    #!  ingress_issuer: letsencrypt-http01-issuer
+    #! /https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
 
     tap_gui:
       metadataStoreAutoconfiguration: true
