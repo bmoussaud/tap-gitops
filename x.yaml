@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  namespace: cert-manager
+  name: tap-gui-truc
+spec:
+  commonName: tap-gui.truc.machin.bidule.com
+  dnsNames:
+    - tap-gui.truc.machin.bidule.com
+  issuerRef:
+    name: letsencrypt-http01-issuer
+    kind: ClusterIssuer
+  secretName: tap-gui-truc

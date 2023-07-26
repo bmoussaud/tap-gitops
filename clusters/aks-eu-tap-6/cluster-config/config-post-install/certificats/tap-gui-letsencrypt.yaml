@@ -18,6 +18,14 @@ spec:
           ingress:
             class: contour
 ---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: install-registry-dockerconfig
+  namespace: cert-manager  
+spec:
+  fromNamespace: tanzu-sync
+---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
