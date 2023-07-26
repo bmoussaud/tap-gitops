@@ -17,10 +17,6 @@ tap_install:
       - policy.apps.tanzu.vmware.com
       - image-policy-webhook.signingappliveview-connector
 
-    ootb_templates:
-      excluded_templates:
-        - convention-template
-
     accelerator:
       ingress:
         include: true
@@ -30,21 +26,6 @@ tap_install:
       envoy:
         service:
           type: LoadBalancer
-
-    supply_chain: basic
-
-    ootb_supply_chain_basic:
-      carvel_package:
-        workflow_enabled: true
-        name_suffix: pkg.mytanzu.xyz
-      registry:
-        server: akseutap6registry.azurecr.io
-        repository: library/tanzu-supply-chain
-      gitops:
-        ssh_secret: ""
-        server_address: https://github.com/
-        repository_owner: bmoussaud
-        repository_name: micropets-app-gitops
 
     #! Inprogres, need to setup a wild card dnds
     #! https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
