@@ -10,7 +10,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: benoit@moussaud.org
+    email: tap@moussaud.org
     privateKeySecretRef:
       name: letsencrypt-http01-issuer
     solvers:
