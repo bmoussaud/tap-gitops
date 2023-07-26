@@ -48,9 +48,9 @@ tap_install:
 
     tap_gui:
       metadataStoreAutoconfiguration: true
-      tls:
-        namespace: cert-manager
-        secretName: tap-gui-cert-letsencrypt
+      #tls:
+      #  namespace: cert-manager
+      #  secretName: tap-gui-cert-letsencrypt
       app_config:
         auth:
           allowGuestAccess: true
