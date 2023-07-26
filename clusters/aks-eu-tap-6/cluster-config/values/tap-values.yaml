@@ -46,6 +46,10 @@ tap_install:
         repository_owner: bmoussaud
         repository_name: micropets-app-gitops
 
+    #! https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
+    cnrs:
+      ingress_issuer: "letsencrypt-http01-issuer"
+
     tap_gui:
       metadataStoreAutoconfiguration: true
       tls:
@@ -74,12 +78,12 @@ tap_install:
       parameter_prefixes:
         - tap.tanzu.vmware.com
       default_parameters:
-      #! https://docs-staging.vmware.com/en/draft/VMware-Tanzu-Application-Platform/1.6/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-all-namespaces-4
+        #! https://docs-staging.vmware.com/en/draft/VMware-Tanzu-Application-Platform/1.6/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-all-namespaces-4
         supply_chain_service_account:
-          secrets:           
+          secrets:
             - app-registry
             - git-ssh
-            - registries-credentials            
+            - registries-credentials
           imagePullSecrets:
             - app-registry
             - tap-registry
