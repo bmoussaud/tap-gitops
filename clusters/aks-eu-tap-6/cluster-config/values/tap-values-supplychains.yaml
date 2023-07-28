@@ -7,18 +7,18 @@ tap_install:
     supply_chain: testing
 
     #! supply_chain basic
-    ootb_supply_chain_basic:
-      carvel_package:
-        workflow_enabled: true
-        name_suffix: pkg.mytanzu.xyz
-      registry:
-        server: akseutap6registry.azurecr.io
-        repository: library/tanzu-supply-chain
+    ootb_supply_chain_basic:      
       gitops:
         ssh_secret: ""
         server_address: https://github.com/
         repository_owner: bmoussaud
         repository_name: micropets-app-gitops
+      registry:
+        server: akseutap6registry.azurecr.io
+        repository: library/tanzu-supply-chain
+      carvel_package:
+        workflow_enabled: true
+        name_suffix: pkg.mytanzu.xyz
 
     #! supply_chain testing
     ootb_supply_chain_testing:
