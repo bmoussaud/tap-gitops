@@ -56,6 +56,19 @@ tap_install:
       metadataStore:
         url: ""
 
+    local_source_proxy:
+      repository: akseutap6registry.azurecr.io/lsp
+
+      push_secret:
+        name: lsp-push-credentials
+        namespace: tap-install
+        create_export: true
+
+      pull_secret:
+        name: lsp-pull-credentials
+        namespace: tap-install
+        create_export: true
+
     namespace_provisioner:
       controller: true
       parameter_prefixes:
