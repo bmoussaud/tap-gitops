@@ -21,6 +21,9 @@ gen-sensitive-values:
 gen-tap-gui-icon-values:
 	TAP_ICON_BASE64=$(shell base64 -i clusters/$(CLUSTER_NAME)/cluster-config/tap-logo.png) ytt -f templates/tap-gui-icon-values.yaml --data-values-file clusters/$(CLUSTER_NAME)/cluster-config/values/tap-install-values.yaml --data-values-env TAP > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-gui-icon-values.yaml
 
+gen-lsp-secrets:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ytt -f templates/tap-registry-secrets.yaml --data-values-env INSTALL_REGISTRY > clusters/aks-eu-tap-6/cluster-config/config-post-install/lsp/lsp-sensitive-values.yaml
+
 encrypt:
 	find clusters/$(CLUSTER_NAME) -name "*-sensitive.yaml" -exec ./encrypt_sops.sh {} \;
 
