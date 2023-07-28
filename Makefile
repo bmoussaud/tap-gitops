@@ -47,3 +47,25 @@ encrypt-secret-store:
 	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt  --encrypted-regex '^(data|stringData|tenantId)$$' ~/.azure/rbac/vault-micropets.yaml >  clusters/$(CLUSTER_NAME)/cluster-config/values/cluster-secret-store.yaml
 
 
+CLUSTER_ESSENTIAL_INSTALL_BUNDLE=tanzu-cluster-essentials/cluster-essentials-bundle@sha256:54e516b5d088198558d23cababb3f907cd8073892cacfb2496bb9d66886efe15
+
+tanzu-cluster-essentials:		
+	source ~/.kube/acr/.$(strip $(REGISTRY_NAME)).config
+	echo "## Test$(strip $(REGISTRY_NAME)) Registry..."
+	source ~/.kube/acr/.$(strip $(REGISTRY_NAME)).config && test_registry_$(strip $(REGISTRY_NAME))
+	imgpkg copy -b  registry.tanzu.vmware.com/$(CLUSTER_ESSENTIAL_INSTALL_BUNDLE) --to-repo $(strip $(REGISTRY_NAME)).azurecr.io/tanzu-cluster-essentials/cluster-essentials-bundle --include-non-distributable-layers --concurrency 5
+	echo "## create namespace tanzu-cluster-essentials"
+	kubectl create namespace tanzu-cluster-essentials --dry-run=client -o yaml | kubectl apply -f -
+	echo "## pull the bundle"
+	imgpkg pull -b $(strip $(REGISTRY_NAME)).azurecr.io/$(CLUSTER_ESSENTIAL_INSTALL_BUNDLE) -o /tmp/bundle/
+
+	echo "## Deploying kapp-controller"
+	ytt -f /tmp/bundle/kapp-controller/config/ -f /tmp/bundle/registry-creds/ --data-value-yaml registry.server=${INSTALL_REGISTRY_HOSTNAME} --data-value-yaml registry.username=${INSTALL_REGISTRY_USERNAME} --data-value-yaml registry.password=${INSTALL_REGISTRY_PASSWORD} --data-value-yaml kappController.deployment.concurrency=10 | kbld -f- -f /tmp/bundle/.imgpkg/images.yml | kapp deploy --yes -a kapp-controller -n tanzu-cluster-essentials -f-
+
+	echo "## Deploying secretgen-controller"
+	ytt -f /tmp/bundle/secretgen-controller/config/ -f /tmp/bundle/registry-creds/ --data-value-yaml registry.server=${INSTALL_REGISTRY_HOSTNAME} --data-value-yaml registry.username=${INSTALL_REGISTRY_USERNAME} --data-value-yaml registry.password=${INSTALL_REGISTRY_PASSWORD}| kbld -f- -f /tmp/bundle/.imgpkg/images.yml | kapp deploy --yes -a secretgen-controller -n tanzu-cluster-essentials -f-
+
+	@rm  -rf /tmp/bundle/
+
+
+
