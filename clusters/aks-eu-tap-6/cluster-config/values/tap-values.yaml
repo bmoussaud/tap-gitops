@@ -71,6 +71,9 @@ tap_install:
         namespace: tap-install
         create_export: true
 
+    tap_telemetry:
+      installed_for_vmware_internal_use: "true"
+      
     namespace_provisioner:
       controller: true
       parameter_prefixes:
