@@ -23,10 +23,9 @@ tap_install:
         include: true
         enable_tls: true
       tls:
-        namespace:  
-        secret_name: toto
-
-
+        namespace: accelerator-system
+        secret_name: acc-server-tls
+        
     contour:
       envoy:
         service:
