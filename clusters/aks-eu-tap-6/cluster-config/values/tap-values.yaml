@@ -7,7 +7,7 @@ tap_install:
     #!      - name: git-writer-no-empty-commits-debug
 
     shared:
-      ingress_domain: 161.tanzu.moussaud.org
+      ingress_domain: 16x.tanzu.moussaud.org
 
     ceip_policy_disclosed: true
 
