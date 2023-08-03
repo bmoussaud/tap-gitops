@@ -1,0 +1,24 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-cert
+  namespace: tap-install
+spec:
+  secretName: wildcard-cert-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-http01-issuer
+  dnsNames:
+  - "*.16x.tanzu.moussaud.org"
+---
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: wildcard-cert-tls
+  namespace: tap-install
+spec:
+  delegations:
+    - secretName: wildcard-cert-tls
+      targetNamespaces:
+      - "*"

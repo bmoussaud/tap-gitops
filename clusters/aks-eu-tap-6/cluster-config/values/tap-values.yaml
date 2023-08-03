@@ -23,9 +23,9 @@ tap_install:
         include: true
         enable_tls: true
       tls:
-        namespace: accelerator-system
-        secret_name: acc-server-tls
-        
+        namespace: tap-install
+        secret_name: wildcard-cert-tls
+
     contour:
       envoy:
         service:
