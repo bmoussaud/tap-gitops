@@ -22,6 +22,6 @@ spec:
   dnsNames:
     - accelerator.16x.tanzu.moussaud.org
   issuerRef:
-    name: letsencrypt-http01-issuer
+    name: letsencrypt-http01-issuer-staging
     kind: ClusterIssuer
   secretName: web-ssl
