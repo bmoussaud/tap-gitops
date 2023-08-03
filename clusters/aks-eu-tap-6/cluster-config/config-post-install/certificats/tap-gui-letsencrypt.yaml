@@ -82,6 +82,6 @@ spec:
   issuerRef:
     name: letsencrypt-http01-issuer
     kind: ClusterIssuer
-  secretName: tap-gui-cert-letsencrypt
+  secretName: accelerator-cert-letsencrypt
 
 
