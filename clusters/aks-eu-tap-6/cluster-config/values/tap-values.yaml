@@ -20,7 +20,7 @@ tap_install:
     accelerator:
       ingress:
         include: true
-        issuer: letsencrypt-http01-issuer
+    #!  issuer: letsencrypt-http01-issuer
 
     contour:
       envoy:
