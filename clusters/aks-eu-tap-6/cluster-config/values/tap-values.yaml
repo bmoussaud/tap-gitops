@@ -22,7 +22,10 @@ tap_install:
       ingress:
         include: true
         enable_tls: true
-        issuer: letsencrypt-http01-issuer
+      tls:
+        namespace:  
+        secret_name: toto
+
 
     contour:
       envoy:
