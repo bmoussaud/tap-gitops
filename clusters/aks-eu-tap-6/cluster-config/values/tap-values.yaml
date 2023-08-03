@@ -22,9 +22,7 @@ tap_install:
       ingress:
         include: true
         enable_tls: true
-      tls:
-        namespace: cert-manager
-        secret_name: accelerator-cert-letsencrypt
+        issuer: letsencrypt-http01-issuer
 
     contour:
       envoy:
