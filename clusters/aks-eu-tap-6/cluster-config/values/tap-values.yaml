@@ -22,7 +22,9 @@ tap_install:
       ingress:
         include: true
         enable_tls: true
-    #!  issuer: letsencrypt-http01-issuer
+      tls:
+        namespace: cert-manager
+        secret_name: accelerator-cert-letsencrypt
 
     contour:
       envoy:
@@ -73,7 +75,7 @@ tap_install:
 
     tap_telemetry:
       installed_for_vmware_internal_use: "true"
-      
+
     namespace_provisioner:
       controller: true
       parameter_prefixes:
