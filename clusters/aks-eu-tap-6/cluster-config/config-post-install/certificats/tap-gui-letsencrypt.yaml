@@ -76,12 +76,10 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
 spec:
-  commonName: tap-gui.16x.tanzu.moussaud.org
+  commonName: accelerator.16x.tanzu.moussaud.org
   dnsNames:
-    - tap-gui.16x.tanzu.moussaud.org
+    - accelerator.16x.tanzu.moussaud.org
   issuerRef:
     name: letsencrypt-http01-issuer
     kind: ClusterIssuer
   secretName: accelerator-cert-letsencrypt
-
-
