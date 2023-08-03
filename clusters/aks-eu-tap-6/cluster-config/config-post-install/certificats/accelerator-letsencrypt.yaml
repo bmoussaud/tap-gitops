@@ -14,5 +14,6 @@ spec:
   issuerRef:
     name: letsencrypt-http01-issuer
     kind: ClusterIssuer
+  secretName: acc-server-tls
   
 
