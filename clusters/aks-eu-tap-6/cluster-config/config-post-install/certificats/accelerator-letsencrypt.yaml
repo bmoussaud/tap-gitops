@@ -2,13 +2,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: accelerator-cert-tls
-  namespace: cert-manager
+  name: web-ssl
 type: kubernetes.io/tls
-# Normally, we'd create an empty destination secret, but secrets of type
-# 'kubernetes.io/tls' are treated in a special way and need to have properties
-# data["tls.crt"] and data["tls.key"] to begin with, though they may be empty.
-data:
+stringData:
+  tls.key: ""
+  tls.crt: ""
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -26,4 +24,4 @@ spec:
   issuerRef:
     name: letsencrypt-http01-issuer
     kind: ClusterIssuer
-  secretName: accelerator-cert-tls
+  secretName: web-ssl
