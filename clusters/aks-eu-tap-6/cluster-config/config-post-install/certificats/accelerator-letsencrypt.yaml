@@ -9,8 +9,6 @@ type: kubernetes.io/tls
 # 'kubernetes.io/tls' are treated in a special way and need to have properties
 # data["tls.crt"] and data["tls.key"] to begin with, though they may be empty.
 data:
-  tls.key: ""
-  tls.crt: ""
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
