@@ -1,0 +1,36 @@
+#! run azure.sh before....to get the ClientId
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-contour-cluster-issuer
+spec:
+  acme:
+    email: "tap@moussaud.org"
+    privateKeySecretRef:
+      name: acme-account-key
+    #! server: https://acme-v02.api.letsencrypt.org/directory
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    solvers:
+      - dns01:
+          azureDNS:
+            hostedZoneName: tanzu.moussaud.org
+            resourceGroupName: moussaud.org
+            subscriptionID: cbca10bb-6ddc-45bd-8f18-c17d1dd1003f
+            environment: AzurePublicCloud
+            managedIdentity:
+              clientID: 44466f39-4857-474f-9609-617334d14a7e
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-cert
+  namespace: tap-install
+spec:
+  secretName: wildcard-cert-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-contour-cluster-issuer
+  dnsNames:
+    - "*.16x.tanzu.moussaud.org"
+---
+
