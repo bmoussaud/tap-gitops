@@ -3,3 +3,4 @@ clusters/aks-eu-tap-6/cluster-config/config-post-install/es/azure-secret-sp-sens
 clusters/aks-eu-tap-6/cluster-config/config-post-install/lsp/lsp-sensitive.yaml
 clusters/aks-eu-tap-6/cluster-config/values/tap-sensitive-values.yaml
 clusters/aks-eu-tap-6/cluster-config/values/tap-values-sensitive.yaml
+

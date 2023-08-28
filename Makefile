@@ -7,6 +7,9 @@ new-instance:
 	./setup-repo.sh $(CLUSTER_NAME) sops	
 	touch clusters/$(CLUSTER_NAME)/cluster-config/values/tap-non-sensitive-values.yaml
 
+gen-sensitive-tanzu-sync:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME)
+
 configure:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME) && ./tanzu-sync/scripts/configure.sh
 
