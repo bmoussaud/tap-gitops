@@ -22,9 +22,10 @@ tap_install:
       ingress:
         include: true
         enable_tls: true
-      tls:
-        namespace: tap-install
-        secret_name: accelerator-cert-tls
+      #!tls:
+      #!  namespace: tap-install
+      #!  secret_name: accelerator-cert-tls
+    
     contour:
       envoy:
         service:
