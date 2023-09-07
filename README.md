@@ -42,3 +42,11 @@ make encrypt     // all the files following the pattern '-sensitive.yaml' become
 make deploy
 make tap-update-dns tap-gui-ip
 ``
+
+* Upgrade TAP Version
+
+```
+./copy_tap_package.sh akseutap6registry 1.6.3-rc.5
+make gen-tap-gui-icon-values TAP_VERSION=1.6.3-rc.5
+make gen-install-values TAP_VERSION=1.6.3-rc.5
+```
