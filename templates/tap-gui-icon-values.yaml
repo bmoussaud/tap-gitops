@@ -8,5 +8,5 @@ tap_install:
         organization:
           name: #@ "MicroPets Corp IT Department (GitOps SOPS) {}".format(data.values.tap_install.version.package_version)
         customize:
-          custom_logo: #@ data.values.ICON_BASE64
           custom_name: #@ "Tanzu Application Platform Version.{}".format(data.values.tap_install.version.package_version)
+          custom_logo: #@ data.values.ICON_BASE64
