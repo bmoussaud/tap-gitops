@@ -1,11 +1,6 @@
 tap_install:
   values:
     profile: full
-    #! package_overlays:
-    #!  - name: ootb-templates
-    #!    secrets:
-    #!      - name: git-writer-no-empty-commits-debug
-
     shared:
       ingress_domain: 16x.tanzu.moussaud.org
       ingress_issuer: letsencrypt-http01-issuer
