@@ -48,4 +48,6 @@ make tap-update-dns tap-gui-ip
 ```
 ./copy_tap_package.sh akseutap6registry 1.6.3-rc.5
 make gen-install-values gen-tap-gui-icon-values  TAP_VERSION=1.6.3-rc.5
+git commit -am "1.6.3-rc.5" 
+git push
 ```
