@@ -169,7 +169,7 @@ roleRef:
   name: tap-default
 subjects:
   - kind: ServiceAccount
-    name: tap-default  
+    name: tap-default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -179,6 +179,20 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: tap-default
-subjects:  
+subjects:
   - kind: ServiceAccount
     name: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: default-sa-claim-class-app-operator-claim-class-mongodb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: app-operator-claim-class-mongodb
+subjects:
+  - kind: ServiceAccount
+    name: default
+  - kind: ServiceAccount
+    name: tap-default
