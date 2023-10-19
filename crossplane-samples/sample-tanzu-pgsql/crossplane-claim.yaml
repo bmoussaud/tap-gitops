@@ -1,0 +1,11 @@
+apiVersion: azure.database.tanzu.moussaud.org/v1alpha1
+kind: PostgreSQLInstance
+metadata:
+  name: claim-xp-az-demo-pgsql
+  namespace: musicstore-dev
+spec:
+  location: "france"
+  version: "13"
+  storageGB: 32
+  writeConnectionSecretToRef:
+    name: my-claim-secret

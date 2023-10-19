@@ -1,0 +1,17 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerDatabase
+metadata:
+  labels:
+    testing.upbound.io/example-name: tap
+  name: benoitdb-psql-flexible-server-db
+  namespace: database-instances-france
+spec:
+  providerConfigRef:
+    name: provider-config-azure
+  forProvider:
+    charset: utf8
+    collation: en_US.utf8
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: tap
+

@@ -1,0 +1,40 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  labels:
+    testing.upbound.io/example-name: tap
+  name: benoitdb-psql-flexible-server
+  namespace: database-instances-france
+spec:
+  providerConfigRef:
+    name: provider-config-azure
+  forProvider:
+    administratorLogin: psqladmin
+    administratorPasswordSecretRef:
+      key: password
+      name: benoitdb-psql-secret
+      namespace: database-instances-france
+    location: France Central
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/tap: demo
+    skuName: GP_Standard_D4s_v3
+    storageMb: 32768
+    version: "12"
+---
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerFirewallRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: tap
+  name: benoitdb-psql-flexible-server-fw
+  namespace: database-instances-france
+spec:
+  providerConfigRef:
+    name: provider-config-azure
+  forProvider:
+    serverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: tap
+    startIpAddress: 0.0.0.0
+    endIpAddress: 255.255.255.255

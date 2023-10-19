@@ -1,0 +1,207 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xpostgresqlinstances.azure.database.tanzu.moussaud.org
+  labels:
+    provider: bmoussaud-azure
+    type: postgresql
+    architecture: azure
+spec:
+  writeConnectionSecretsToNamespace: crossplane-system
+  publishConnectionDetailsWithStoreConfigRef:
+    name: default
+  compositeTypeRef:
+    apiVersion: azure.database.tanzu.moussaud.org/v1alpha1
+    kind: XPostgreSQLInstance
+  resources:
+    - name: resource-group
+      base:
+        apiVersion: azure.upbound.io/v1beta1
+        kind: ResourceGroup
+        metadata:
+          name: tap-crossplane-databases
+          labels:
+            provider.moussaud.org/tap: xpostgresqlinstances.azure
+        spec:
+          forProvider:
+            location: "France Central"
+          providerConfigRef:
+            name: provider-config-azure
+      patches:
+        - fromFieldPath: spec.location
+          toFieldPath: spec.forProvider.location
+          transforms:
+            - type: map
+              map:
+                france: France Central
+                other: West Europe
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-rg"
+    - name: flexible-server
+      base:
+        apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+        kind: FlexibleServer
+        metadata:
+          labels:
+            provider.moussaud.org/tap: xpostgresqlinstances.azure
+          name: flexible-server
+        spec:
+          providerConfigRef:
+            name: provider-config-azure
+          forProvider:
+            administratorLogin: pgsqladmin
+            administratorPasswordSecretRef:
+              key: password
+              name: name-password
+              namespace: crossplane-system
+            location: byconfiguration
+            resourceGroupNameSelector:
+              matchLabels:
+                provider.moussaud.org/tap: xpostgresqlinstances.azure
+            skuName: GP_Standard_D4s_v3
+            storageMb: byconfiguration
+            version: byconfiguration
+          writeConnectionSecretToRef:
+            namespace: crossplane-system
+      patches:
+        - fromFieldPath: spec.storageGB
+          toFieldPath: spec.forProvider.storageMb
+          type: FromCompositeFieldPath
+          transforms:
+            - type: math
+              math:
+                multiply: 1024
+        - fromFieldPath: spec.version
+          toFieldPath: spec.forProvider.version
+        - fromFieldPath: spec.location
+          toFieldPath: spec.forProvider.location
+          transforms:
+            - type: map
+              map:
+                france: France Central
+                other: West Europe
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-server"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.administratorPasswordSecretRef.name
+        - fromFieldPath: metadata.uid
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - string:
+                fmt: "%s-postgresql"
+                type: Format
+              type: string
+      connectionDetails:
+        - name: type
+          value: postgresql
+        - name: provider
+          value: bmoussaud-azure
+        - name: database
+          value: postgres
+        - name: username
+          fromFieldPath: spec.forProvider.administratorLogin
+        - name: host
+          fromFieldPath: status.atProvider.fqdn
+        - name: port
+          type: FromValue
+          value: "5432"
+    - name: flexible-server-fw
+      base:
+        apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+        kind: FlexibleServerFirewallRule
+        metadata:
+          labels:
+            provider.moussaud.org/tap: xpostgresqlinstances.azure
+          name: flexible-server
+        spec:
+          providerConfigRef:
+            name: provider-config-azure
+          forProvider:
+            serverIdSelector:
+              matchLabels:
+                provider.moussaud.org/tap: xpostgresqlinstances.azure
+            startIpAddress: 0.0.0.0
+            endIpAddress: 255.255.255.255
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-server-fw"
+    - name: flexible-server-db
+      base:
+        apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+        kind: FlexibleServerDatabase
+        metadata:
+          labels:
+            provider.moussaud.org/tap: xpostgresqlinstances.azure
+          name: flexible-server-database
+        spec:
+          providerConfigRef:
+            name: provider-config-azure
+          forProvider:
+            charset: utf8
+            collation: en_US.utf8
+            serverIdSelector:
+              matchLabels:
+                provider.moussaud.org/tap: xpostgresqlinstances.azure
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-server-db"
+    - name: pg-password
+      base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          connectionDetails:
+            - apiVersion: v1
+              kind: Secret
+              name: ""
+              namespace: crossplane-system
+              fieldPath: data.password
+              toConnectionSecretKey: password
+          forProvider:
+            manifest:
+              apiVersion: secretgen.k14s.io/v1alpha1
+              kind: Password
+              metadata:
+                namespace: crossplane-system
+              spec:
+                length: 64
+                digits: 10
+                symbols: 4
+                uppercaseLetters: 3
+                symbolCharSet: "!@#%&*;.:"
+                secretTemplate:
+                  stringData:
+                    password: $(value)
+                  type: Opaque
+          writeConnectionSecretToRef:
+            namespace: crossplane-system
+      connectionDetails:
+        - fromConnectionSecretKey: password
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.metadata.name
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.connectionDetails[0].name
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - string:
+                fmt: "%s-postgresql-password"
+                type: Format
+              type: string

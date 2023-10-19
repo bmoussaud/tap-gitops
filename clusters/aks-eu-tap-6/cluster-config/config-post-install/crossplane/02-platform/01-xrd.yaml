@@ -1,0 +1,62 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xpostgresqlinstances.azure.database.tanzu.moussaud.org
+spec:
+  group: azure.database.tanzu.moussaud.org
+  names:
+    kind: XPostgreSQLInstance
+    plural: xpostgresqlinstances
+  claimNames:
+    kind: PostgreSQLInstance
+    plural: postgresqlinstances
+  connectionSecretKeys:
+    - provider
+    - type
+    - host
+    - port
+    - database
+    - username
+    - password
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              description: |
+                The specification for how this PostgreSQLInstance should be
+                deployed.
+              properties:
+                location:
+                  type: string
+                  enum:
+                    - france
+                    - other
+                  default: france
+                  description: |
+                    The geographic location in which this PostgreSQLInstance
+                    should be deployed.
+                version:
+                  type: string
+                  enum:
+                    - "12"
+                    - "13"
+                    - "14"
+                  default: "12"
+                  description: |
+                    The version of this PostgreSQLInstance.
+                storageGB:
+                  type: integer
+                  minimum: 32
+                  default: 32
+                  description: |
+                    The storage size for this PostgreSQLInstance in GB.
+              required:
+                - location
+                - version
+                - storageGB

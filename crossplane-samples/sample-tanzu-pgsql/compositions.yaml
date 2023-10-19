@@ -1,0 +1,9 @@
+apiVersion: azure.database.tanzu.moussaud.org/v1alpha1
+kind: XPostgreSQLInstance
+metadata:
+  name: direct-xp-az-demo-pgsql
+  namespace: musicstore-dev
+spec:
+  location: "france"
+  version: "13"
+  storageGB: 32
