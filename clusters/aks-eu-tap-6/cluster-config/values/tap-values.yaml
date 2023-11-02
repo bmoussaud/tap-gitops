@@ -82,13 +82,14 @@ tap_install:
           imagePullSecrets:
             - app-registry
             - tap-registry
-        limits:
-          default:
-            cpu: 2000m
-            memory: 2000Mi
-          defaultRequest:
-            cpu: 100m
-            memory: 500Mi
+        #! on full & iterate profiles limits can fail build in the supply chain.
+        #! limits:
+        #!  default:
+        #!    cpu: 2g
+        #!    memory: 2gi
+        #!  defaultRequest:
+        #!    cpu: 100m
+        #!    memory: 500Mi
       additional_sources:
         - git:
             url: https://github.com/bmoussaud/tap-gitops.git
