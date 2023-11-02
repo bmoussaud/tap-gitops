@@ -11,14 +11,13 @@ tap_install:
       - learningcenter.tanzu.vmware.com
       - workshops.learningcenter.tanzu.vmware.com
       - policy.apps.tanzu.vmware.com
-      - image-policy-webhook.signingappliveview-connector      
-
+      - image-policy-webhook.signingappliveview-connector
 
     accelerator:
       ingress:
         include: true
         enable_tls: true
-     
+
     contour:
       envoy:
         service:
@@ -32,9 +31,9 @@ tap_install:
 
     tap_gui:
       metadataStoreAutoconfiguration: true
-      #tls:
-      #  namespace: cert-manager
-      #  secretName: tap-gui-cert-letsencrypt
+      tls:
+        namespace: cert-manager
+        secretName: tap-gui-cert-letsencrypt
       app_config:
         auth:
           allowGuestAccess: true
