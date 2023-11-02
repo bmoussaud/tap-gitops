@@ -84,8 +84,8 @@ tap_install:
             - tap-registry
         limits:
           default:
-            cpu: 1700m
-            memory: 1500Mi
+            cpu: 2000m
+            memory: 2000Mi
           defaultRequest:
             cpu: 100m
             memory: 500Mi
