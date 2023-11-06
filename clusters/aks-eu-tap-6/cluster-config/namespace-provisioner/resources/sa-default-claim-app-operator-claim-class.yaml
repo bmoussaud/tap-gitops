@@ -29,11 +29,11 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: #@ data.values.name+"-sa-default-claim-app-operator-claim-azure-psql-moussaud"
+  name: #@ data.values.name+"-sa-default-claim-app-operator-claim-azure-psql-bmoussaud"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: app-operator-claim-azure-psql-moussaud
+  name: app-operator-claim-azure-psql-bmoussaud
 subjects:
   - kind: ServiceAccount
     name: default
