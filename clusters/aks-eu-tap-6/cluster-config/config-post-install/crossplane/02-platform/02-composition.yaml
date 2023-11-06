@@ -103,7 +103,7 @@ spec:
         - name: type
           value: postgresql
         - name: provider
-          value: bmoussaud-azure
+          value: crossplane-azure
         - name: database
           value: postgres
         - name: username
