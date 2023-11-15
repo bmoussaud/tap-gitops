@@ -9,15 +9,7 @@ spec:
     plural: xpostgresqlinstances
   claimNames:
     kind: PostgreSQLInstance
-    plural: postgresqlinstances
-  connectionSecretKeys:
-    - provider
-    - type
-    - host
-    - port
-    - database
-    - username
-    - password
+    plural: postgresqlinstances  
   versions:
     - name: v1alpha1
       served: true
@@ -60,3 +52,11 @@ spec:
                 - location
                 - version
                 - storageGB
+  connectionSecretKeys:
+    - provider
+    - type
+    - host
+    - port
+    - database
+    - username
+    - password

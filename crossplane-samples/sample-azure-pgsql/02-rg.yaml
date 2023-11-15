@@ -1,15 +1,3 @@
-apiVersion: secretgen.k14s.io/v1alpha1
-kind: Password
-metadata:
-  name: benoitdb-psql-secret
-  namespace: database-instances-france
-spec:
-  length: 24
-  secretTemplate:
-    type: Opaque
-    stringData:
-      password: 123%ABC#$(value)
----
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
