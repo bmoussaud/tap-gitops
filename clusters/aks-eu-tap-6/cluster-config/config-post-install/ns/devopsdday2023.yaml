@@ -4,5 +4,4 @@ metadata:
   labels:
     apps.tanzu.vmware.com/tap-ns: ""
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs
-    tap.tanzu.vmware.com/databases: postgres
   name: devopsdday2023
