@@ -47,13 +47,9 @@ tap_install:
     metadata_store:
       ns_for_export_app_cert: "*"
       app_service_type: ClusterIP
-
-    scanning:
-      metadataStore:
-        url: ""
-
+    
     local_source_proxy:
-      repository: akseutap6registry.azurecr.io/lsp
+      repository: akseutap7registry.azurecr.io/lsp
 
       push_secret:
         name: lsp-push-credentials
