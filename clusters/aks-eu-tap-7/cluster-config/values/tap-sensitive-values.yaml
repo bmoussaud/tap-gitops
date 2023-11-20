@@ -1,0 +1,7 @@
+tap_install:
+  sensitive_values:
+    shared:
+      image_registry:
+        project_path: akseutap7registry.azurecr.io/library/tanzu-build-service
+        username: 95b380af-4b3f-45d6-bff8-26f25d0b1db2
+        password: Di58Q~_WugqYQ5.XHs52CDuVVG1U2ShbOcs3Ha90

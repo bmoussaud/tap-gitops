@@ -1,0 +1,98 @@
+tap_install:
+  values:
+    profile: full
+    shared:
+      ingress_domain: 16x.tanzu.moussaud.org
+      ingress_issuer: letsencrypt-http01-issuer
+
+    ceip_policy_disclosed: true
+
+    excluded_packages:
+      - learningcenter.tanzu.vmware.com
+      - workshops.learningcenter.tanzu.vmware.com
+      - policy.apps.tanzu.vmware.com
+      - image-policy-webhook.signingappliveview-connector
+
+    accelerator:
+      ingress:
+        include: true
+        enable_tls: true
+
+    contour:
+      envoy:
+        service:
+          type: LoadBalancer
+
+    #! Inprogres, need to setup a wild card dnds
+    #! https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
+    #!cnrs:
+    #!  ingress_issuer: letsencrypt-http01-issuer
+    #! /https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
+
+    tap_gui:
+      metadataStoreAutoconfiguration: true
+      tls:
+        namespace: cert-manager
+        secretName: tap-gui-cert-letsencrypt
+      app_config:
+        auth:
+          allowGuestAccess: true
+        catalog:
+          locations:
+            - type: url
+              target: https://github.com/bmoussaud/micropets-app/blob/master/catalog-info.yaml
+            - type: url
+              target: https://github.com/bmoussaud/micropets-cats-golang/blob/main/catalog-component.yaml
+
+    metadata_store:
+      ns_for_export_app_cert: "*"
+      app_service_type: ClusterIP
+
+    scanning:
+      metadataStore:
+        url: ""
+
+    local_source_proxy:
+      repository: akseutap6registry.azurecr.io/lsp
+
+      push_secret:
+        name: lsp-push-credentials
+        namespace: tap-install
+        create_export: true
+
+      pull_secret:
+        name: lsp-pull-credentials
+        namespace: tap-install
+        create_export: true
+
+    tap_telemetry:
+      installed_for_vmware_internal_use: "true"
+
+    namespace_provisioner:
+      controller: true
+      parameter_prefixes:
+        - tap.tanzu.vmware.com
+      default_parameters:
+        #! https://docs-staging.vmware.com/en/draft/VMware-Tanzu-Application-Platform/1.6/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-all-namespaces-4
+        supply_chain_service_account:
+          secrets:
+            - app-registry
+            - git-ssh
+            - registries-credentials
+          imagePullSecrets:
+            - app-registry
+            - tap-registry
+        #! on full & iterate profiles limits can fail build in the supply chain.
+        #! limits:
+        #!  default:
+        #!    cpu: 2g
+        #!    memory: 2gi
+        #!  defaultRequest:
+        #!    cpu: 100m
+        #!    memory: 500Mi
+      additional_sources:
+        - git:
+            url: https://github.com/bmoussaud/tap-gitops.git
+            ref: origin/main
+            subPath: clusters/aks-eu-tap-6/cluster-config/namespace-provisioner/resources
+          path: _ytt_lib/namespace-provisioner-resources

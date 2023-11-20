@@ -1,0 +1,6 @@
+tap_install:
+  package_repository:
+    oci_repository: akseutap7registry.azurecr.io/tanzu-application-platform/tap-packages
+  version:
+    package_repo_bundle_tag: 1.7.1-rc.5
+    package_version: 1.7.1-rc.5
