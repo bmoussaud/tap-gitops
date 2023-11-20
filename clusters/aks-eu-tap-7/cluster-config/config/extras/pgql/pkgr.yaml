@@ -11,4 +11,4 @@ metadata:
 spec:
   fetch:
     imgpkgBundle:      
-      image: #@ "{}/packages-for-vmware-tanzu-data-services/tds-packages:{}".format("akseutap6registry.azurecr.io", "1.12.1")
+      image: #@ "{}/packages-for-vmware-tanzu-data-services/tds-packages:{}".format("akseutap7registry.azurecr.io", "1.12.1")
