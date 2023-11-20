@@ -2,7 +2,7 @@ tap_install:
   values:
     profile: full
     shared:
-      ingress_domain: 16x.tanzu.moussaud.org
+      ingress_domain: 17x.tanzu.moussaud.org
       ingress_issuer: letsencrypt-http01-issuer
 
     ceip_policy_disclosed: true
@@ -94,5 +94,5 @@ tap_install:
         - git:
             url: https://github.com/bmoussaud/tap-gitops.git
             ref: origin/main
-            subPath: clusters/aks-eu-tap-6/cluster-config/namespace-provisioner/resources
+            subPath: clusters/aks-eu-tap-7/cluster-config/namespace-provisioner/resources
           path: _ytt_lib/namespace-provisioner-resources
