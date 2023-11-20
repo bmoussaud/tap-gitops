@@ -1,7 +1,14 @@
-SOPS_AGE_KEY_FILE=~/.dotconfig/tapkey.txt
+SOPS_AGE_KEY_FILE=~/dotconfig/tapkey.txt
 CLUSTER_NAME=aks-eu-tap-6
 REGISTRY_NAME=$(shell echo $(subst -,,$(CLUSTER_NAME)-Registry) | tr '[:upper:]' '[:lower:]') 
 TAP_VERSION=1.5.4
+
+check_defined = \
+    $(strip $(foreach 1,$1, \
+        $(call __check_defined,$1,$(strip $(value 2)))))
+__check_defined = \
+    $(if $(value $1),, \
+      $(error Undefined $1$(if $2, ($2))))
 
 new-instance:
 	./setup-repo.sh $(CLUSTER_NAME) sops	
@@ -13,6 +20,14 @@ gen-sensitive-tanzu-sync:
 configure:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME) && ./tanzu-sync/scripts/configure.sh
 
+clone:
+	$(call check_defined, FROM_CLUSTER_NAME)	
+	cp clusters/$(FROM_CLUSTER_NAME)/cluster-config/values/tap-values.yaml clusters/$(CLUSTER_NAME)/cluster-config/values/tap-values.yaml
+	cp -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/config/extras clusters/$(CLUSTER_NAME)/cluster-config/config
+	sed "s/$(FROM_CLUSTER_NAME)/$(CLUSTER_NAME)/g" clusters/$(FROM_CLUSTER_NAME)/cluster-config/config/extras/config-post-install/app.yaml > clusters/$(CLUSTER_NAME)/cluster-config/config/extras/config-post-install/app.yaml
+	cp  -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/config-post-install clusters/$(CLUSTER_NAME)/cluster-config
+
+
 generate: gen-install-values gen-sensitive-values gen-tap-gui-icon-values encrypt
 
 gen-install-values:
@@ -21,7 +36,10 @@ gen-install-values:
 gen-sensitive-values:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ytt -f templates/tap-sensitive-values.yaml --data-values-env INSTALL_REGISTRY > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.yaml 
 
-gen-tap-gui-icon-values:
+tap-gui-icon: 
+	cp templates/tap-logo.png clusters/$(CLUSTER_NAME)/cluster-config/tap-logo.png
+
+gen-tap-gui-icon-values: tap-gui-icon
 	TAP_ICON_BASE64=$(shell base64 -i clusters/$(CLUSTER_NAME)/cluster-config/tap-logo.png) ytt -f templates/tap-gui-icon-values.yaml --data-values-file clusters/$(CLUSTER_NAME)/cluster-config/values/tap-install-values.yaml --data-values-env TAP > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-gui-icon-values.yaml
 
 gen-lsp-secrets:
