@@ -39,7 +39,7 @@ make new-instance CLUSTER_NAME=aks-eu-tap-7
 make configure CLUSTER_NAME=aks-eu-tap-7
 make generate CLUSTER_NAME=aks-eu-tap-7 TAP_VERSION=1.7.1-rc.5
 make clone FROM_CLUSTER_NAME=aks-eu-tap-6 CLUSTER_NAME=aks-eu-tap-7
-make encrypt     // all the files following the pattern '-sensitive.yaml' become encrypted and added to git ignore
+make encrypt   CLUSTER_NAME=aks-eu-tap-7  // all the files following the pattern '-sensitive.yaml' become encrypted and added to git ignore
 make deploy
 make tap-update-dns tap-gui-ip
 ``

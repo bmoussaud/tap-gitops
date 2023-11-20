@@ -27,7 +27,6 @@ clone:
 	sed "s/$(FROM_CLUSTER_NAME)/$(CLUSTER_NAME)/g" clusters/$(FROM_CLUSTER_NAME)/cluster-config/config/extras/config-post-install/app.yaml > clusters/$(CLUSTER_NAME)/cluster-config/config/extras/config-post-install/app.yaml
 	cp  -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/config-post-install clusters/$(CLUSTER_NAME)/cluster-config
 
-
 generate: gen-install-values gen-sensitive-values gen-tap-gui-icon-values encrypt
 
 gen-install-values:
@@ -51,7 +50,7 @@ encrypt:
 decrypt:
 	export SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) && sops --decrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
 
-deploy:		
+deploy: tanzu-cluster-essentials
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && cd ./clusters/$(CLUSTER_NAME) && ./tanzu-sync/scripts/deploy.sh
 
 undeploy:
@@ -75,7 +74,7 @@ encrypt-secret-store:
 	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt  --encrypted-regex '^(data|stringData|tenantId)$$' ~/.azure/rbac/vault-micropets.yaml >  clusters/$(CLUSTER_NAME)/cluster-config/values/cluster-secret-store.yaml
 
 
-CLUSTER_ESSENTIAL_INSTALL_BUNDLE=tanzu-cluster-essentials/cluster-essentials-bundle@sha256:54e516b5d088198558d23cababb3f907cd8073892cacfb2496bb9d66886efe15
+CLUSTER_ESSENTIAL_INSTALL_BUNDLE=tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ca8584ff2ad4a4cf7a376b72e84fd9ad84ac6f38305767cdfb12309581b521f5
 
 tanzu-cluster-essentials:		
 	source ~/.kube/acr/.$(strip $(REGISTRY_NAME)).config
