@@ -66,9 +66,16 @@ tap-gui-ip:
 tap-update-dns:
 	./update_tap_dns.sh
 
-
 availables_version:
 	imgpkg tag list -i registry.tanzu.vmware.com/tanzu-application-platform/tap-packages | sort -V
+
+
+TDS_VERSION=1.12.1
+copy_pgsql_package:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && ./copy_package.sh packages-for-vmware-tanzu-data-services/tds-packages $(TDS_VERSION) 
+
+copy_pgsql_package_2:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && ./copy_package.sh tanzu-sql-postgres/vmware-sql-postgres-operator v2.2.1 
 
 encrypt-secret-store:
 	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt  --encrypted-regex '^(data|stringData|tenantId)$$' ~/.azure/rbac/vault-micropets.yaml >  clusters/$(CLUSTER_NAME)/cluster-config/values/cluster-secret-store.yaml
