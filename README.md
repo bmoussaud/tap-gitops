@@ -35,7 +35,7 @@ clusters/aks-eu-tap-6/cluster-config
 ```
 
 ````
-make tanzu-cluster-essentials CLUSTER_NAME=aks-eu-tap-7
+make tanzu-cluster-essentials copy_pgsql_package CLUSTER_NAME=aks-eu-tap-7
 make new-instance CLUSTER_NAME=aks-eu-tap-7
 make configure CLUSTER_NAME=aks-eu-tap-7
 make generate CLUSTER_NAME=aks-eu-tap-7 TAP_VERSION=1.7.1-rc.5

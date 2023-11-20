@@ -25,7 +25,9 @@ clone:
 	cp clusters/$(FROM_CLUSTER_NAME)/cluster-config/values/tap-values.yaml clusters/$(CLUSTER_NAME)/cluster-config/values/tap-values.yaml
 	cp -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/config/extras clusters/$(CLUSTER_NAME)/cluster-config/config
 	sed "s/$(FROM_CLUSTER_NAME)/$(CLUSTER_NAME)/g" clusters/$(FROM_CLUSTER_NAME)/cluster-config/config/extras/config-post-install/app.yaml > clusters/$(CLUSTER_NAME)/cluster-config/config/extras/config-post-install/app.yaml
-	cp  -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/config-post-install clusters/$(CLUSTER_NAME)/cluster-config
+	cp -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/config-post-install clusters/$(CLUSTER_NAME)/cluster-config
+	cp -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/namespace-provisioner clusters/$(CLUSTER_NAME)/cluster-config
+	sed "s/$(FROM_CLUSTER_NAME)/$(CLUSTER_NAME)/g" clusters/$(FROM_CLUSTER_NAME)/cluster-config/values/tap-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-values.yaml
 
 generate: gen-install-values gen-sensitive-values gen-tap-gui-icon-values encrypt
 
@@ -70,19 +72,17 @@ availables_version:
 	imgpkg tag list -i registry.tanzu.vmware.com/tanzu-application-platform/tap-packages | sort -V
 
 
-TDS_VERSION=1.12.1
-copy_pgsql_package:
-	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && ./copy_package.sh packages-for-vmware-tanzu-data-services/tds-packages $(TDS_VERSION) 
-
-copy_pgsql_package_2:
-	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && ./copy_package.sh tanzu-sql-postgres/vmware-sql-postgres-operator v2.2.1 
 
 encrypt-secret-store:
 	SOPS_AGE_RECIPIENTS=`cat ${SOPS_AGE_KEY_FILE} | grep "# public key: " | sed 's/# public key: //'` && sops --encrypt  --encrypted-regex '^(data|stringData|tenantId)$$' ~/.azure/rbac/vault-micropets.yaml >  clusters/$(CLUSTER_NAME)/cluster-config/values/cluster-secret-store.yaml
 
 
-CLUSTER_ESSENTIAL_INSTALL_BUNDLE=tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ca8584ff2ad4a4cf7a376b72e84fd9ad84ac6f38305767cdfb12309581b521f5
+TDS_VERSION=1.12.1
+copy_pgsql_package:
+	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) && ./copy_package.sh packages-for-vmware-tanzu-data-services/tds-packages $(TDS_VERSION) 
 
+
+CLUSTER_ESSENTIAL_INSTALL_BUNDLE=tanzu-cluster-essentials/cluster-essentials-bundle@sha256:ca8584ff2ad4a4cf7a376b72e84fd9ad84ac6f38305767cdfb12309581b521f5
 tanzu-cluster-essentials:		
 	source ~/.kube/acr/.$(strip $(REGISTRY_NAME)).config
 	echo "## Test$(strip $(REGISTRY_NAME)) Registry..."
