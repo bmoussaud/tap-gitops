@@ -3,7 +3,7 @@ tap_install:
     profile: full
     shared:
       ingress_domain: 17x.tanzu.moussaud.org
-      #ingress_issuer: letsencrypt-http01-issuer
+      ingress_issuer: letsencrypt-http01-issuer
 
     ceip_policy_disclosed: true
 
@@ -31,9 +31,9 @@ tap_install:
 
     tap_gui:
       metadataStoreAutoconfiguration: true
-      #tls:
-      #  namespace: cert-manager
-      #  secretName: tap-gui-cert-letsencrypt
+      tls:
+        namespace: cert-manager
+        secretName: tap-gui-cert-letsencrypt
       app_config:
         auth:
           allowGuestAccess: true
