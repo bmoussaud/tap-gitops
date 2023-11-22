@@ -33,7 +33,7 @@ tap_install:
       metadataStoreAutoconfiguration: true
       tls:
         namespace: cert-manager
-        secretName: tap-gui-cert-letsencrypt
+        secretName: tap-gui
       app_config:
         auth:
           allowGuestAccess: true
@@ -47,7 +47,7 @@ tap_install:
     metadata_store:
       ns_for_export_app_cert: "*"
       app_service_type: ClusterIP
-    
+
     local_source_proxy:
       repository: akseutap7registry.azurecr.io/lsp
 
