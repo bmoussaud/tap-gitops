@@ -11,7 +11,6 @@ SUFFIX_DNS=$(echo ${DOMAINS_NAME} | cut -d "." -f 3,4,5)
 echo "TAP_INSTANCE: ${TAP_INSTANCE}"
 echo "SUFFIX_DNS:   ${SUFFIX_DNS}"
 echo "IP:           ${IP}"
-exit 1
 set -x 
 az network dns record-set a delete -g moussaud.org -z ${SUFFIX_DNS} -n "*.${TAP_INSTANCE}" -y
 az network dns record-set a create -g moussaud.org -z ${SUFFIX_DNS} -n "*.${TAP_INSTANCE}" --metadata owner=tanzu
