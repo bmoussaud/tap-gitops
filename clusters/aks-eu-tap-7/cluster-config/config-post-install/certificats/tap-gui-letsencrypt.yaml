@@ -18,9 +18,15 @@ spec:
       - http01:
           ingress:
             class: contour
+<<<<<<< HEAD
             #podTemplate:
             #  spec:
             #    serviceAccountName: tap-acme-http01-solver
+=======
+            podTemplate:
+              spec:
+                serviceAccountName: tap-acme-http01-solver
+>>>>>>> 7248cea (add tap-gui cert for aks-eu-tap-7)
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
