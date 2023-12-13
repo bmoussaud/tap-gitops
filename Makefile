@@ -47,7 +47,7 @@ gen-lsp-secrets:
 	source ./env.sh $(strip $(REGISTRY_NAME)) $(SOPS_AGE_KEY_FILE) $(CLUSTER_NAME) &&  ytt -f templates/tap-lsp-registry-secrets.yaml --data-values-env INSTALL_REGISTRY > clusters/$(CLUSTER_NAME)/cluster-config/config-post-install/lsp/lsp-sensitive-values.yaml
 
 encrypt:
-	find clusters/$(CLUSTER_NAME) -name "*-sensitive.yaml" -exec ./encrypt_sops.sh {} \;
+	find clusters/$(CLUSTER_NAME) -name "*-sensitive-values.yaml" -exec ./encrypt_sops.sh {} \;
 
 decrypt:
 	export SOPS_AGE_KEY_FILE=$(SOPS_AGE_KEY_FILE) && sops --decrypt clusters/$(CLUSTER_NAME)/cluster-config/values/tap-sensitive-values.sops.yaml
