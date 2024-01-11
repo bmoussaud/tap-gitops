@@ -29,7 +29,8 @@ clone:
 	cp -r clusters/$(FROM_CLUSTER_NAME)/cluster-config/namespace-provisioner clusters/$(CLUSTER_NAME)/cluster-config
 	sed "s/$(FROM_CLUSTER_NAME)/$(CLUSTER_NAME)/g" clusters/$(FROM_CLUSTER_NAME)/cluster-config/values/tap-values.yaml > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-values.yaml
 
-generate: gen-install-values gen-sensitive-values gen-tap-gui-icon-values encrypt
+
+generate: gen-install-values gen-sensitive-values gen-tap-gui-icon-values gen-lsp-secrets encrypt
 
 gen-install-values:
 	source ~/.kube/acr/.$(strip $(REGISTRY_NAME)).config && TAP_VERSION=$(TAP_VERSION) ytt -f templates/tap-install-values.yaml --data-values-env INSTALL_REGISTRY --data-values-env TAP > clusters/$(CLUSTER_NAME)/cluster-config/values/tap-install-values.yaml 	

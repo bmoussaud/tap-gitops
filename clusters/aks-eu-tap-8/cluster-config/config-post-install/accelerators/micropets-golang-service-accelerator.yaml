@@ -1,0 +1,12 @@
+apiVersion: accelerator.apps.tanzu.vmware.com/v1alpha1
+kind: Accelerator
+metadata:
+  name: micropets-golang-service-accelerator
+  namespace: accelerator-system
+spec:
+  git:
+    gitImplementation: go-git
+    interval: 5s
+    ref:
+      branch: main
+    url: https://github.com/bmoussaud/micropets-golang-service-accelerator

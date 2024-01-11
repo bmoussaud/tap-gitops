@@ -1,0 +1,36 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:yaml", "yaml")
+---
+#@ def in_list(property, value):
+#@  return hasattr(data.values, property) and ( value in data.values[property])
+#@ end
+#@ if in_list('databases', 'postgres'):
+---
+apiVersion: sql.tanzu.vmware.com/v1
+kind: Postgres
+metadata:
+  name: #@ data.values.name+"-database"
+spec:
+  memory: 800Mi
+  cpu: "0.8"
+  pgConfig:
+    dbname: #@ data.values.name+"-database"
+    username: pgadmin
+    appUser: admin
+  imagePullSecret:
+    name: app-registry
+  highAvailability:
+    enabled: false
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: #@ data.values.name+"-tanzu-postgresql-database"
+spec:
+  ref:
+    apiVersion: sql.tanzu.vmware.com/v1
+    kind: Postgres
+    name: #@ data.values.name+"-database"
+    namespace: #@ data.values.name
+---
+#@ end

@@ -1,0 +1,15 @@
+# Need by ClusterIssuer clusters/aks-eu-tap-6/cluster-config/config-post-install/certificats/tap-gui-letsencrypt.yaml
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: install-registry-dockerconfig
+spec:
+  fromNamespace: tanzu-sync
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tap-acme-http01-solver
+imagePullSecrets:
+  - name: install-registry-dockerconfig

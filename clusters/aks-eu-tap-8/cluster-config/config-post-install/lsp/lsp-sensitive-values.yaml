@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lsp-push-credentials
+  namespace: tap-install
+type: kubernetes.io/dockerconfigjson
+stringData:
+  .dockerconfigjson: '{"auths":{"akseutap8registry.azurecr.io":{"password":"zbe8Q~N3yG4saysiy7ZkSnj8~AUtvgAibZnPtda2","username":"07dc038e-c5fd-4821-9f3c-0c389148e469"}}}'
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lsp-pull-credentials
+  namespace: tap-install
+type: kubernetes.io/dockerconfigjson
+stringData:
+  .dockerconfigjson: '{"auths":{"akseutap8registry.azurecr.io":{"password":"zbe8Q~N3yG4saysiy7ZkSnj8~AUtvgAibZnPtda2","username":"07dc038e-c5fd-4821-9f3c-0c389148e469"}}}'

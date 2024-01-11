@@ -1,0 +1,17 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: application-configuration-service
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/change-group: pkgi/extra
+    kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
+    kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
+spec:
+  serviceAccountName: tap-installer-sa
+  packageRef:
+    refName: application-configuration-service.tanzu.vmware.com
+    versionSelection:
+      constraints: ">= 2.0.0"
+      prereleases: {}
+    
