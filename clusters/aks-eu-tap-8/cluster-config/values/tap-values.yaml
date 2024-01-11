@@ -90,5 +90,6 @@ tap_install:
         - git:
             url: https://github.com/bmoussaud/tap-gitops.git
             ref: origin/main
-            subPath: clusters/aks-eu-tap-7/cluster-config/namespace-provisioner/resources
+            subPath: clusters/aks-eu-tap-8/cluster-config/namespace-provisioner/resources
           path: _ytt_lib/namespace-provisioner-resources
+

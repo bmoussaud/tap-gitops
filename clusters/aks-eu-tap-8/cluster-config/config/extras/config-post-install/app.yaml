@@ -13,7 +13,7 @@ spec:
     - git:
         url: https://github.com/bmoussaud/tap-gitops.git
         ref: origin/main
-        subPath: clusters/aks-eu-tap-7/cluster-config/config-post-install
+        subPath: clusters/aks-eu-tap-8/cluster-config/config-post-install
   template:
     - sops:
         age:
