@@ -1,19 +1,19 @@
 apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
-  name: post-install
+  name: drivers
   namespace: tanzu-sync
   annotations:
-    kapp.k14s.io/change-group: apps/extra
-    kapp.k14s.io/change-rule.0: "upsert after upserting apps/drivers"
-    kapp.k14s.io/change-rule.1: "delete before deleting apps/drivers"
+    kapp.k14s.io/change-group: apps/drivers
+    kapp.k14s.io/change-rule.0: "upsert after upserting pkgi/extra"
+    kapp.k14s.io/change-rule.1: "delete before deleting pkgi/extra"
 spec:
   serviceAccountName: sync-sa
   fetch:
     - git:
         url: https://github.com/bmoussaud/tap-gitops.git
         ref: origin/main
-        subPath: clusters/aks-eu-tap-8/cluster-config/config-post-install
+        subPath: clusters/aks-eu-tap-8/cluster-config/drivers
   template:
     - sops:
         age:
