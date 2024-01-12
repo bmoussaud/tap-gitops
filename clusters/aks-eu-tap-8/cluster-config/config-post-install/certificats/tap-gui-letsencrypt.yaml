@@ -32,9 +32,9 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
 spec:
-  commonName: tap-gui.17x.tanzu.moussaud.org
+  commonName: tap-gui.18x.tanzu.moussaud.org
   dnsNames:
-    - tap-gui.17x.tanzu.moussaud.org
+    - tap-gui.18x.tanzu.moussaud.org
   issuerRef:
     name: letsencrypt-http01-issuer
     kind: ClusterIssuer
