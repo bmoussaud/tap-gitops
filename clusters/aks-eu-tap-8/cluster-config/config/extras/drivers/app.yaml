@@ -8,7 +8,7 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgi/extra"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgi/extra"
 spec:
-  serviceAccountName: sync-sa
+  serviceAccountName: tap-sync-sa
   fetch:
     - git:
         url: https://github.com/bmoussaud/tap-gitops.git
@@ -18,7 +18,7 @@ spec:
     - sops:
         age:
           privateKeysSecretRef:
-            name: sync-age-identity
+            name: tap-sync-age-identity
     - ytt: {}
   deploy:
     - kapp:
