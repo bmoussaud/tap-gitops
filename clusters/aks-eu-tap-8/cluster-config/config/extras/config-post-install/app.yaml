@@ -1,12 +1,3 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: sync-sa
-  namespace: tanzu-sync
-  annotations:
-    tanzu-sync.tanzu.vmware.com/variant: sops
-    tanzu-sync.tanzu.vmware.com/version: 0.3.3+2023-11-30-104552_(1543ef5)
----
 apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
