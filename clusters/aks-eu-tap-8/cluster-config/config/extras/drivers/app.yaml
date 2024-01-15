@@ -2,7 +2,7 @@ apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
   name: drivers
-  namespace: tanzu-sync
+  namespace: tap-operator
   annotations:
     kapp.k14s.io/change-group: apps/drivers
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgi/extra"
