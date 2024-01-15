@@ -6,8 +6,8 @@ metadata:
   namespace: tanzu-extras
   annotations:
     kapp.k14s.io/change-group: apps/drivers
-    kapp.k14s.io/change-rule.0: "upsert after upserting pkgi/extra"
-    kapp.k14s.io/change-rule.1: "delete before deleting pkgi/extra"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu/ns"
+    kapp.k14s.io/change-rule.1: "delete before deleting tanzu/ns"
 spec:
   serviceAccountName: tanzu-extras-sa
   fetch:
