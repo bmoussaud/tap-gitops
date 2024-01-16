@@ -1,8 +1,10 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: v1
 kind: Namespace
 metadata:
   name: tap-empty-ns
   labels:
     demo: demo
-    version: "1.1"
+    version: #@ data.values.tap_version
     
