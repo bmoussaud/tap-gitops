@@ -2,3 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: tap-empty-ns
+  labels:
+    demo: demo
+    version: "1.1"
+    
