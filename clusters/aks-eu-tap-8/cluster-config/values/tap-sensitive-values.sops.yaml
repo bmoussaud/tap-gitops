@@ -1,3 +1,5 @@
+#@ load("@ytt:data", "data")
+---
 tap_install:
     sensitive_values:
         shared:
