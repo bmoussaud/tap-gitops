@@ -5,6 +5,8 @@ metadata:
   name: tanzu-extras
   annotations:
     kapp.k14s.io/change-group: tanzu/ns
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-sync"
+    kapp.k14s.io/change-rule.1: "delete before deleting tanzu-sync"
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -13,6 +15,8 @@ metadata:
   namespace: tanzu-extras
   annotations:
     kapp.k14s.io/change-group: tanzu/ns
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-sync"
+    kapp.k14s.io/change-rule.1: "delete before deleting tanzu-sync"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -20,10 +24,14 @@ metadata:
   name: tanzu-extras-tap-operator-cluster-admin
   annotations:
     kapp.k14s.io/change-group: tanzu/ns
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-sync"
+    kapp.k14s.io/change-rule.1: "delete before deleting tanzu-sync"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
   name: tap-operator-cluster-admin
+  kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-sync"
+  kapp.k14s.io/change-rule.1: "delete before deleting tanzu-sync"
 subjects:
   - kind: ServiceAccount
     name: tanzu-extras-sa
@@ -34,6 +42,8 @@ kind: SecretImport
 metadata:
   annotations:
     kapp.k14s.io/change-group: tanzu/ns
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-sync"
+    kapp.k14s.io/change-rule.1: "delete before deleting tanzu-sync"
   name: tap-install-registry-dockerconfig
   namespace: tanzu-extras
 spec:
@@ -44,6 +54,8 @@ kind: SecretImport
 metadata:
   annotations:
     kapp.k14s.io/change-group: tanzu/ns
+    kapp.k14s.io/change-rule.0: "upsert after upserting tanzu-sync"
+    kapp.k14s.io/change-rule.1: "delete before deleting tanzu-sync"
   name: tap-sync-age-identity
   namespace: tanzu-extras
 spec:
