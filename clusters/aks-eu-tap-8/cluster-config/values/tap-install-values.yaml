@@ -4,5 +4,5 @@ tap_install:
   package_repository:
     oci_repository: akseutap8registry.azurecr.io/tanzu-application-platform/tap-packages
   version:
-    package_repo_bundle_tag: #@ data.values.tap_version
-    package_version: #@ data.values.tap_version 
+    package_repo_bundle_tag: 1.8.0-build.65
+    package_version: 1.8.0-build.65 
