@@ -2,18 +2,24 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tanzu-extras  
+  name: tanzu-extras
+  annotations:
+    kapp.k14s.io/change-group: tanzu/ns
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: tanzu-extras-sa
   namespace: tanzu-extras
+  annotations:
+    kapp.k14s.io/change-group: tanzu/ns
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: tanzu-extras-tap-operator-cluster-admin
+  annotations:
+    kapp.k14s.io/change-group: tanzu/ns
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -26,6 +32,8 @@ subjects:
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
 metadata:
+  annotations:
+    kapp.k14s.io/change-group: tanzu/ns
   name: tap-install-registry-dockerconfig
   namespace: tanzu-extras
 spec:
@@ -34,6 +42,8 @@ spec:
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
 metadata:
+  annotations:
+    kapp.k14s.io/change-group: tanzu/ns
   name: tap-sync-age-identity
   namespace: tanzu-extras
 spec:
