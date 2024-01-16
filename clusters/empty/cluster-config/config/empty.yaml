@@ -6,5 +6,5 @@ metadata:
   name: tap-empty-ns
   labels:
     demo: demo
-    version: #@ data.values.tap_version
-    
+    version: #@ data.values.tapinfo.tap_version
+
