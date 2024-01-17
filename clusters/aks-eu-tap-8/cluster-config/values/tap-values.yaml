@@ -77,7 +77,7 @@ tap_install:
             - registries-credentials
           imagePullSecrets:
             - app-registry
-            - tap-registry
+            - tap-install-registry-dockerconfig
         #! on full & iterate profiles limits can fail build in the supply chain.
         #! limits:
         #!  default:
@@ -92,4 +92,3 @@ tap_install:
             ref: origin/main
             subPath: clusters/aks-eu-tap-8/cluster-config/namespace-provisioner/resources
           path: _ytt_lib/namespace-provisioner-resources
-
