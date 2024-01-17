@@ -7,4 +7,4 @@ kind: ServiceAccount
 metadata:
   name: tap-acme-http01-solver
 imagePullSecrets:
-  - name: install-registry-dockerconfig
+  - name: tap-install-registry-dockerconfig

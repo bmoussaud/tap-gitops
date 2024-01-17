@@ -2,7 +2,7 @@
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
 metadata:
-  name: install-registry-dockerconfig
+  name: tap-install-registry-dockerconfig
   namespace: accelerator-system
   annotations:
     kapp.k14s.io/change-group: pkgi/extra
@@ -21,4 +21,4 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
 imagePullSecrets:
-  - name: install-registry-dockerconfig
+  - name: tap-install-registry-dockerconfig

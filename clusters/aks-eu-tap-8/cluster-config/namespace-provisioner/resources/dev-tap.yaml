@@ -80,7 +80,7 @@ secrets:
   - name: git-ssh
 imagePullSecrets:
   - name: app-registry
-  - name: install-registry-dockerconfig
+  - name: tap-install-registry-dockerconfig
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
