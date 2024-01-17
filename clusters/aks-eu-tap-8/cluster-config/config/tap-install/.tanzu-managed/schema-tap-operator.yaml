@@ -1,0 +1,4 @@
+#@data/values-schema
+---
+tap_operator:
+  tap_version: "x"
