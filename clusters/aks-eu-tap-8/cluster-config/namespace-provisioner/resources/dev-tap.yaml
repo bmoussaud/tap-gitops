@@ -3,7 +3,15 @@
 #@ load("@ytt:json", "json")
 ---
 #! tap-registry exported from tapp-install using secretexports.secretgen.carvel.dev
-#! but it has defined in the azure keyvault.
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: install-registry-dockerconfig  
+spec:
+  fromNamespace: tap-operator
+---
+#! but it has defined in the azure keyvault. (error to fetch it)
 ---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
@@ -81,7 +89,7 @@ secrets:
   - name: git-ssh
 imagePullSecrets:
   - name: app-registry
-  - name: tap-registry
+  - name: install-registry-dockerconfig
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -168,4 +176,3 @@ subjects:
     name: tap-default
   - kind: ServiceAccount
     name: default
-
