@@ -10,7 +10,7 @@ kind: ExternalSecret
 metadata:
   name: azure-tap-registry
 spec:
-  refreshInterval: 1s
+  refreshInterval: 2s
   secretStoreRef:
     kind: ClusterSecretStore
     name: cluster-azure-backend
