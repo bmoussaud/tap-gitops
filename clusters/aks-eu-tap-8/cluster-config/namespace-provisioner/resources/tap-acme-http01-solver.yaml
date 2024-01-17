@@ -5,7 +5,7 @@ kind: SecretImport
 metadata:
   name: install-registry-dockerconfig
 spec:
-  fromNamespace: tanzu-sync
+  fromNamespace: tap-operator
 ---
 apiVersion: v1
 kind: ServiceAccount
