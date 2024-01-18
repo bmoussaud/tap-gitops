@@ -32,7 +32,7 @@ echo "
 ---
 apiVersion: v1
 kind: ServiceAccount
-metadata:
+metadata:  
   labels:
     azure.workload.identity/use: \"true\"
   annotations:
