@@ -1,0 +1,67 @@
+tap_install:
+  values:
+    
+    supply_chain: testing
+
+    #! supply_chain basic
+    ootb_supply_chain_basic:      
+      gitops:
+        ssh_secret: ""
+        username: tap-benoit
+        email: benoat@vmware.com
+        server_address: https://github.com/
+        repository_owner: bmoussaud
+        repository_name: micropets-app-gitops
+        commit_message: Commit by TAP Supply Chain
+      registry:
+        server: akseutap8registry.azurecr.io
+        repository: library/tanzu-supply-chain
+      carvel_package:
+        workflow_enabled: true
+        name_suffix: pkg.mytanzu.xyz
+
+    #! supply_chain testing
+    ootb_supply_chain_testing:
+      registry:
+        server: akseutap8registry.azurecr.io
+        repository: library/tanzu-supply-chain
+      gitops:
+        ssh_secret: ""
+        username: tap-benoit
+        email: benoat@vmware.com
+        server_address: https://github.com/
+        repository_owner: bmoussaud
+        repository_name: micropets-app-gitops
+        commit_message: Commit by TAP Supply Chain
+      supported_workloads:
+        - cluster_config_template_name: config-template
+          type: web
+        - cluster_config_template_name: server-template
+          type: server
+        - cluster_config_template_name: worker-template
+          type: worker
+        - cluster_config_template_name: secured-config-template
+          type: secured-web
+
+    #! supply_chain testing_scanning
+    ootb_supply_chain_testing_scanning:
+      registry:
+        server: akseutap8registry.azurecr.io
+        repository: library/tanzu-supply-chain
+        commit_message: Commit by TAP Supply Chain
+      gitops:
+        ssh_secret: ""
+        username: tap-benoit
+        email: benoat@vmware.com
+        server_address: https://github.com/
+        repository_owner: bmoussaud
+        repository_name: micropets-app-gitops
+      supported_workloads:
+        - cluster_config_template_name: config-template
+          type: web
+        - cluster_config_template_name: server-template
+          type: server
+        - cluster_config_template_name: worker-template
+          type: worker
+        - cluster_config_template_name: secured-config-template
+          type: secured-web
