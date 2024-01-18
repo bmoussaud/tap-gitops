@@ -6,7 +6,7 @@ tap_install:
     #! supply_chain basic
     ootb_supply_chain_basic:      
       gitops:
-        ssh_secret: ""
+        ssh_secret: git-credentials
         username: tap-benoit
         email: benoat@vmware.com
         server_address: https://github.com/
@@ -26,7 +26,7 @@ tap_install:
         server: akseutap8registry.azurecr.io
         repository: library/tanzu-supply-chain
       gitops:
-        ssh_secret: ""
+        ssh_secret: git-credentials
         username: tap-benoit
         email: benoat@vmware.com
         server_address: https://github.com/
@@ -50,7 +50,7 @@ tap_install:
         repository: library/tanzu-supply-chain
         commit_message: Commit by TAP Supply Chain
       gitops:
-        ssh_secret: ""
+        ssh_secret: git-credentials
         username: tap-benoit
         email: benoat@vmware.com
         server_address: https://github.com/
