@@ -11,7 +11,7 @@ clusters/aks-eu-tap-7/cluster-config/config-post-install/lsp/lsp-sensitive-value
 clusters/aks-eu-tap-7/cluster-config/config-post-install/lsp/lsp-sensitive.yaml
 clusters/aks-eu-tap-7/cluster-config/values/tap-sensitive-values.yaml
 clusters/aks-eu-tap-8/cluster-config/config-post-install/crossplane/01-azure-provider-conf/02-azure-secret-sensitive.yaml
+clusters/aks-eu-tap-8/cluster-config/config-post-install/external-secrets/azure-secret-sp-sensitive.yaml
 clusters/aks-eu-tap-8/cluster-config/config-post-install/lsp/lsp-sensitive-values.yaml
 clusters/aks-eu-tap-8/cluster-config/config/tap-install/.tanzu-managed/schema--tap-sensitive-values.yaml
 clusters/aks-eu-tap-8/cluster-config/values/tap-sensitive-values.yaml
-clusters/aks-eu-tap-8/cluster-config/config-post-install/external-secrets/azure-secret-sp-sensitive.yaml
