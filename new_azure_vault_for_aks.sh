@@ -29,6 +29,7 @@ TENANT_ID=$(az account show --query tenantId | tr -d \") && echo $TENANT_ID
 
 # Create a Kubernetes service account for use by ESO
 echo "
+---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -37,27 +38,28 @@ metadata:
   annotations:
     azure.workload.identity/client-id: ${AD_APP_CLIENT_ID}
     azure.workload.identity/tenant-id: ${TENANT_ID}
-  name: workload-identity-sa
-  namespace: ${PLATFORM_OPS_NAMESPACE}
-" > ${TARGET_DIR}/service-account.yaml
+  name: micropets-azure-vault
+  namespace: ${PLATFORM_OPS_NAMESPACE}" >${TARGET_DIR}/micropets-azure-vault.yaml
 
 # Establish federated identity credential between the identity and the service account issuer & subject
 AD_APP_OBJECT_ID="$(az ad app show --id $AD_APP_CLIENT_ID --query id -otsv)" && echo $AD_APP_OBJECT_ID
 ytt -f azure-fed-credential-params.yaml -v platform_ops_namespace=${PLATFORM_OPS_NAMESPACE} -v oidc_issuer_url=$OIDC_ISSUER_URL -ojson >/tmp/fed-credential-params.json
+echo "dump fed-credential-params.json"
 cat /tmp/fed-credential-params.json
+echo "/dump fed-credential-params.json"
 az ad app federated-credential create --id $AD_APP_OBJECT_ID --parameters @/tmp/fed-credential-params.json
 
 echo "
+---
 apiVersion: external-secrets.io/v1beta1
 kind: ClusterSecretStore
 metadata:
-  name: ${RESOURCE_GROUP}-${VAULT_NAME}
+  name: micropets-azure-vault
 spec:
   provider:
     azurekv:
       authType: WorkloadIdentity
       vaultUrl: https://${VAULT_NAME}.vault.azure.net
       serviceAccountRef:
-        name: workload-identity-sa
-        namespace: ${PLATFORM_OPS_NAMESPACE}
-" > ${TARGET_DIR}/cluster-secret-store.yaml
+        name: micropets-azure-vault
+        namespace: ${PLATFORM_OPS_NAMESPACE}" >>${TARGET_DIR}/micropets-azure-vault.yaml
