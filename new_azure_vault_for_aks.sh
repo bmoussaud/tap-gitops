@@ -34,7 +34,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    azure.workload.identity/use: "true"
+    azure.workload.identity/use: true
   annotations:
     azure.workload.identity/client-id: ${AD_APP_CLIENT_ID}
     azure.workload.identity/tenant-id: ${TENANT_ID}
