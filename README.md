@@ -34,7 +34,7 @@ clusters/aks-eu-tap-6/cluster-config
     └── tap-sensitive-values.yaml
 ```
 
-````
+```
 make tanzu-cluster-essentials copy_pgsql_package CLUSTER_NAME=aks-eu-tap-7
 make new-instance CLUSTER_NAME=aks-eu-tap-7
 make configure CLUSTER_NAME=aks-eu-tap-7
@@ -45,9 +45,9 @@ git push
 make deploy CLUSTER_NAME=aks-eu-tap-7
 #wait.... k get app -A -w
 make tap-update-dns tap-gui-ip CLUSTER_NAME=aks-eu-tap-7
-``
+``````
 
-* Upgrade TAP Version
+# Upgrade TAP Version
 
 ```
 ./copy_tap_package.sh akseutap6registry 1.6.3-rc.5
@@ -55,3 +55,11 @@ make gen-install-values gen-tap-gui-icon-values  TAP_VERSION=1.6.3-rc.5
 git commit -am "1.6.3-rc.5" 
 git push
 ```
+
+
+
+# Namespace provisioning
+[Schema](https://excalidraw.com/#json=mAyzSing54fI0AI2v-p9O,W99CkqofGIk3XEW24EeRwQ)
+
+![image](img/nsprovisioning.png)
+

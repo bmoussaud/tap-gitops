@@ -13,8 +13,8 @@ PLATFORM_OPS_NAMESPACE=external-secrets
 az keyvault create --name $VAULT_NAME --resource-group $RESOURCE_GROUP
 
 ## Populate Key Vault with secrets
-az keyvault secret set --name github-username --vault-name $VAULT_NAME --value "bmoussaud"
-az keyvault secret set --name github-username --vault-name $VAULT_NAME --value ${GITHUB_PASSWORD}
+az keyvault secret set --name github-username --vault-name $VAULT_NAME --value ${GITHUB_USERNAME}
+az keyvault secret set --name github-password --vault-name $VAULT_NAME --value ${GITHUB_PASSWORD}
 
 # Rerive the the OIDC issuer URL of the newly created cluster
 OIDC_ISSUER_URL=$(az aks show --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --query "oidcIssuerProfile.issuerUrl" -otsv) && echo $OIDC_ISSUER_URL
