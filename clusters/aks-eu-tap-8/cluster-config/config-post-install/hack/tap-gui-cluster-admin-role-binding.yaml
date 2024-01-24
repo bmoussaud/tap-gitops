@@ -5,9 +5,9 @@ metadata:
   name: hack-tap-gui-cluster-admin
 rules:
   - apiGroups:
-      - "*"
+      - "data.packaging.carvel.dev"
     resources:
-      - "*"
+      - "packages"
     verbs:
       - "*"
 ---
