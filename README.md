@@ -59,7 +59,7 @@ git push
 
 
 # Namespace provisioning
-[Schema](https://excalidraw.com/#json=mAyzSing54fI0AI2v-p9O,W99CkqofGIk3XEW24EeRwQ)
+[Schema](https://excalidraw.com/#json=CUjpRPbE3dq3R3J4XM-CZ,X0i8grd2a-cVTPoGPddqEw)
 
 ![image](img/nsprovisioning.png)
 
