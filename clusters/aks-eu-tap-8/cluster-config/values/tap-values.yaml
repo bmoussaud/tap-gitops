@@ -29,7 +29,7 @@ tap_install:
     #!  ingress_issuer: letsencrypt-http01-issuer
     #! /https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
 
-    tap_gui:      
+    tap_gui:
       tls:
         namespace: cert-manager
         secretName: tap-gui
@@ -37,12 +37,12 @@ tap_install:
         auth:
           allowGuestAccess: true
           environment: production
-        catalog:
-          locations:
-            - type: url
-              target: https://github.com/bmoussaud/micropets-app/blob/master/catalog-info.yaml
-            - type: url
-              target: https://github.com/bmoussaud/micropets-cats-golang/blob/main/catalog-component.yaml
+        #catalog:
+        #  locations:
+        #    - type: url
+        #      target: https://github.com/bmoussaud/micropets-app/blob/master/catalog-info.yaml
+        #    - type: url
+        #      target: https://github.com/bmoussaud/micropets-cats-golang/blob/main/catalog-component.yaml
 
     metadata_store:
       ns_for_export_app_cert: "*"
