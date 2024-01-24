@@ -51,6 +51,25 @@ spec:
       remoteRef:
         key: github-password
 ---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: gitlab-trigger-secret
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: cluster-azure-backend
+  target:
+    name: gitlab-token
+  data:
+    - secretKey: GITLAB_TOKEN
+      remoteRef:
+        key: GITLABTOKEN
+    - secretKey: TRIGGER_TOKEN
+      remoteRef:
+        key: TRIGGERTOKEN
+---
 #@ def app_registry_config():
 #@  return {
 #@    "auths": {
@@ -70,6 +89,16 @@ metadata:
 type: kubernetes.io/dockerconfigjson
 stringData:
   .dockerconfigjson: #@ json.encode(app_registry_config())
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-token
+type: Opaque
+stringData:
+  REGISTRY_HOSTNAME: data.values.tap_values.shared.image_registry.project_path.split('/')[0]
+  REGISTRY_PASSWORD: data.values.tap_values.shared.image_registry.password
+  REGISTRY_USERNAME: data.values.tap_values.shared.image_registry.username
 ---
 apiVersion: v1
 kind: ServiceAccount
