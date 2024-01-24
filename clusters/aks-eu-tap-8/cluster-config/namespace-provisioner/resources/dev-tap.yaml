@@ -96,9 +96,9 @@ metadata:
   name: registry-token
 type: Opaque
 stringData:
-  REGISTRY_HOSTNAME: data.values.tap_values.shared.image_registry.project_path.split('/')[0]
-  REGISTRY_PASSWORD: data.values.tap_values.shared.image_registry.password
-  REGISTRY_USERNAME: data.values.tap_values.shared.image_registry.username
+  REGISTRY_HOSTNAME: #@ data.values.tap_values.shared.image_registry.project_path.split('/')[0]
+  REGISTRY_PASSWORD: #@ data.values.tap_values.shared.image_registry.password
+  REGISTRY_USERNAME: #@ data.values.tap_values.shared.image_registry.username
 ---
 apiVersion: v1
 kind: ServiceAccount
