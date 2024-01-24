@@ -29,14 +29,14 @@ tap_install:
     #!  ingress_issuer: letsencrypt-http01-issuer
     #! /https://docs.vmware.com/en/Cloud-Native-Runtimes-for-VMware-Tanzu/2.2/tanzu-cloud-native-runtimes/tls-guides-letsencrypt-http01.html
 
-    tap_gui:
-      metadataStoreAutoconfiguration: true
+    tap_gui:      
       tls:
         namespace: cert-manager
         secretName: tap-gui
       app_config:
         auth:
           allowGuestAccess: true
+          environment: production
         catalog:
           locations:
             - type: url
