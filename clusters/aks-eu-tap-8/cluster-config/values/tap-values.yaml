@@ -37,12 +37,12 @@ tap_install:
         auth:
           allowGuestAccess: true
           environment: production
-        #catalog:
-        #  locations:
-        #    - type: url
-        #      target: https://github.com/bmoussaud/micropets-app/blob/master/catalog-info.yaml
-        #    - type: url
-        #      target: https://github.com/bmoussaud/micropets-cats-golang/blob/main/catalog-component.yaml
+        catalog:
+          locations:
+            - type: url
+              target: https://github.com/bmoussaud/micropets-app/blob/master/catalog-info.yaml
+            - type: url
+              target: https://github.com/bmoussaud/micropets-cats-golang/blob/main/catalog-component.yaml
 
     metadata_store:
       ns_for_export_app_cert: "*"
