@@ -14,6 +14,8 @@ spec:
     email: tap@moussaud.org
     privateKeySecretRef:
       name: letsencrypt-http01-issuer
+    ca: 
+      secretName: tap-ingress-selfsigned-root-ca
     solvers:
       - http01:
           ingress:
