@@ -9,8 +9,8 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
 spec:
-  ca: 
-    secretName: tap-ingress-selfsigned-root-ca
+  #ca:
+  #  secretName: tap-ingress-selfsigned-root-ca
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: tap@moussaud.org
