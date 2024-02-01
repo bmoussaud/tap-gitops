@@ -1,7 +1,7 @@
 tap_install:
   values:
     
-    supply_chain: testing
+    supply_chain: testing_scanning
 
     #! supply_chain basic
     ootb_supply_chain_basic:      
@@ -12,7 +12,7 @@ tap_install:
         server_address: https://github.com/
         repository_owner: bmoussaud
         repository_name: micropets-app-gitops
-        commit_message: Commit by TAP Supply Chain
+        commit_message: Commit by TAP Supply Chain Basic
       registry:
         server: akseutap8registry.azurecr.io
         repository: library/tanzu-supply-chain
@@ -32,7 +32,7 @@ tap_install:
         server_address: https://github.com/
         repository_owner: bmoussaud
         repository_name: micropets-app-gitops
-        commit_message: Commit by TAP Supply Chain
+        commit_message: Commit by TAP Supply Chain Testing
       supported_workloads:
         - cluster_config_template_name: config-template
           type: web
@@ -48,7 +48,7 @@ tap_install:
       registry:
         server: akseutap8registry.azurecr.io
         repository: library/tanzu-supply-chain
-        commit_message: Commit by TAP Supply Chain
+        commit_message: Commit by TAP Supply Chain Testing and Scanning
       gitops:
         ssh_secret: github-workload-token
         username: tap-benoit
