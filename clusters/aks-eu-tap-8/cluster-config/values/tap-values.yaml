@@ -11,8 +11,7 @@ tap_install:
       - learningcenter.tanzu.vmware.com
       - workshops.learningcenter.tanzu.vmware.com
       - policy.apps.tanzu.vmware.com
-      - image-policy-webhook.signingappliveview-connector
-      - api-portal.tanzu.vmware.com
+      - image-policy-webhook.signingappliveview-connector      
 
     accelerator:
       ingress:
