@@ -5,5 +5,5 @@ metadata:
     apps.tanzu.vmware.com/tap-ns: ""
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs
     tap.tanzu.vmware.com/databases: postgres
-    policy.sigstore.dev/include: true
+    policy.sigstore.dev/include: "true"
   name: micropets-sign
