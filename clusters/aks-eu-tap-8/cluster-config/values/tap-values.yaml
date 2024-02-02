@@ -45,7 +45,7 @@ tap_install:
     api_auto_registration:    
       cluster_name: tap-micropets
 
-    policy-controller:
+    policy_controller:
       tuf_enabled: true 
 
     local_source_proxy:
