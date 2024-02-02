@@ -63,13 +63,15 @@ tap_install:
       parameter_prefixes:
         - tap.tanzu.vmware.com
       default_parameters:
-        #! https://docs-staging.vmware.com/en/draft/VMware-Tanzu-Application-Platform/1.6/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-all-namespaces-4
+        #! https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.7/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-a-specific-namespace-5
+        #! TODO: use a full gitops approach
         supply_chain_service_account:
           secrets:
             - app-registry
             - git-ssh
             - registries-credentials
             - github-workload-token
+            -  micropets-keypair
           imagePullSecrets:
             - app-registry
             - tap-install-registry-dockerconfig
