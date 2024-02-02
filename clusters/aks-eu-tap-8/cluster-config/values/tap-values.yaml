@@ -76,8 +76,7 @@ tap_install:
             - app-registry
             - git-ssh
             - registries-credentials
-            - github-workload-token
-            -  micropets-keypair
+            - github-workload-token            
           imagePullSecrets:
             - app-registry
             - tap-install-registry-dockerconfig
