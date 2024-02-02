@@ -45,6 +45,9 @@ tap_install:
     api_auto_registration:    
       cluster_name: tap-micropets
 
+    policy:
+      tuf_enabled: true 
+
     local_source_proxy:
       repository: akseutap8registry.azurecr.io/lsp
 
