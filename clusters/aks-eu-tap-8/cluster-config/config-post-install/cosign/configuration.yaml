@@ -1,0 +1,7 @@
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretExport
+metadata:
+  name: micropets-cosign-keypair
+  namespace: cosign-system
+spec:
+  toNamespace: "*"
