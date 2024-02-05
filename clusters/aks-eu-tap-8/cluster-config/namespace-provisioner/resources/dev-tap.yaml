@@ -196,3 +196,10 @@ subjects:
     name: tap-default
   - kind: ServiceAccount
     name: default
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: micropets-cosign-keypair
+spec:
+  fromNamespace: cosign-system
