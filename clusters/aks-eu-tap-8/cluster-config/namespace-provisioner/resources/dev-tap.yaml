@@ -196,6 +196,8 @@ subjects:
     name: tap-default
   - kind: ServiceAccount
     name: default
+  - kind: ServiceAccount
+    name: sign-image-sa
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretImport
@@ -210,3 +212,19 @@ metadata:
   name: micropets-other-cosign-keypair
 spec:
   fromNamespace: cosign-system
+---
+apiVersion: v1
+imagePullSecrets:
+- name: registries-credentials
+- name: app-registry
+- name: tap-install-registry-dockerconfig
+kind: ServiceAccount
+metadata:  
+  name: sign-image-sa
+secrets:
+- name: registries-credentials
+- name: app-registry
+- name: git-ssh
+- name: github-workload-token
+- name: micropets-cosign-keypair
+- name: micropets-other-cosign-keypair
