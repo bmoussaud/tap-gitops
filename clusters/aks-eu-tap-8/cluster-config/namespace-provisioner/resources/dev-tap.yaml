@@ -203,3 +203,10 @@ metadata:
   name: micropets-cosign-keypair
 spec:
   fromNamespace: cosign-system
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretImport
+metadata:
+  name: micropets-other-cosign-keypair
+spec:
+  fromNamespace: cosign-system

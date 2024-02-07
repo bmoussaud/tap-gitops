@@ -5,3 +5,12 @@ metadata:
   namespace: cosign-system
 spec:
   toNamespace: "*"
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretExport
+metadata:
+  name: micropets-other-cosign-keypair
+  namespace: cosign-system
+spec:
+  toNamespace: "*"
+
