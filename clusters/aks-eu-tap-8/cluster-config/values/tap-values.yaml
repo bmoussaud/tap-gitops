@@ -42,11 +42,11 @@ tap_install:
       ns_for_export_app_cert: "*"
       app_service_type: ClusterIP
 
-    api_auto_registration:    
+    api_auto_registration:
       cluster_name: tap-micropets
 
     #policy:
-    #  tuf_enabled: true 
+    #  tuf_enabled: true
 
     local_source_proxy:
       repository: akseutap8registry.azurecr.io/lsp
@@ -76,8 +76,9 @@ tap_install:
             - app-registry
             - git-ssh
             - registries-credentials
-            - github-workload-token        
-            - micropets-cosign-keypair    
+            - github-workload-token
+            - micropets-cosign-keypair
+            - micropets-other-cosign-keypair
           imagePullSecrets:
             - app-registry
             - tap-install-registry-dockerconfig
