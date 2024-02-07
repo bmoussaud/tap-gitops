@@ -4,6 +4,6 @@ metadata:
   name: tap
   namespace: tap-operator
 spec:
-  version: 1.8.0-rc.7
+  version: 1.8.0-rc.6
   url: git@github.com:bmoussaud/tap-gitops.git
   subPath: clusters/aks-eu-tap-8/cluster-config
