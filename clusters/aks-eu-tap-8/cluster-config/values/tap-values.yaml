@@ -68,26 +68,26 @@ tap_install:
       controller: true
       parameter_prefixes:
         - tap.tanzu.vmware.com
-      default_parameters:
-        #! https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.7/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-a-specific-namespace-5
-        #! TODO: use a full gitops approach
-        supply_chain_service_account:
-          secrets:
-            - app-registry
-            - git-ssh
-            - registries-credentials
-            - github-workload-token            
-          imagePullSecrets:
-            - app-registry
-            - tap-install-registry-dockerconfig
-        #! on full & iterate profiles limits can fail build in the supply chain.
-        #! limits:
-        #!  default:
-        #!    cpu: 2g
-        #!    memory: 2gi
-        #!  defaultRequest:
-        #!    cpu: 100m
-        #!    memory: 500Mi
+      #default_parameters:
+      #! https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.7/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-a-specific-namespace-5
+      #! TODO: use a full gitops approach
+      #  supply_chain_service_account:
+      #    secrets:
+      #      - app-registry
+      #      - git-ssh
+      #      - registries-credentials
+      #      - github-workload-token
+      #    imagePullSecrets:
+      #      - app-registry
+      #      - tap-install-registry-dockerconfig
+      #! on full & iterate profiles limits can fail build in the supply chain.
+      #! limits:
+      #!  default:
+      #!    cpu: 2g
+      #!    memory: 2gi
+      #!  defaultRequest:
+      #!    cpu: 100m
+      #!    memory: 500Mi
       additional_sources:
         - git:
             url: https://github.com/bmoussaud/tap-gitops.git
