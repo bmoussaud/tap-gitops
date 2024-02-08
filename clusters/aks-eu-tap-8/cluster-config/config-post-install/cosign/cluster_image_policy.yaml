@@ -18,7 +18,7 @@ spec:
 apiVersion: policy.sigstore.dev/v1beta1
 kind: ClusterImagePolicy
 metadata:
-  name: micropets-services-policy-micropets-intergration
+  name: micropets-services-policy-micropets-integration
 spec:
   mode: enforce #! warn or enforce by default
   images:
