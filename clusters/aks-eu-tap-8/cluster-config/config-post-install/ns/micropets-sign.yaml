@@ -6,4 +6,5 @@ metadata:
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs
     tap.tanzu.vmware.com/databases: postgres
     policy.sigstore.dev/include: "true"
+    tap.tanzu.vmware.com/env: int   
   name: micropets-sign

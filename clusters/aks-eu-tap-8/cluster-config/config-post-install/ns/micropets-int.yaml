@@ -5,4 +5,5 @@ metadata:
     apps.tanzu.vmware.com/tap-ns: ""
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs
     tap.tanzu.vmware.com/databases: postgres
+    tap.tanzu.vmware.com/env: int   
   name: micropets-int
