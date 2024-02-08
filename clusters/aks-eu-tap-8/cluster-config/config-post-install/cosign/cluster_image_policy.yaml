@@ -18,11 +18,11 @@ spec:
 apiVersion: policy.sigstore.dev/v1beta1
 kind: ClusterImagePolicy
 metadata:
-  name: micropets-myapp-policy
+  name: micropets-services-policy-micropets-intergration
 spec:
   mode: enforce #! warn or enforce by default
   images:
-    - glob: akseutap8registry.azurecr.io/library/tanzu-supply-chain/my-app-micropets-*
+    - glob: akseutap8registry.azurecr.io/library/tanzu-supply-chain/*-micropets-int*
   authorities:
     - static:
         action: fail #! pass or fail
