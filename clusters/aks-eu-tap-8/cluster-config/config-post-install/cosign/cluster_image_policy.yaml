@@ -15,6 +15,46 @@ spec:
     - static:
         action: pass
 ---
+# apiVersion: policy.sigstore.dev/v1beta1
+# kind: ClusterImagePolicy
+# metadata:
+#   name: micropets-services-policy-micropets-integration
+# spec:
+#   mode: enforce #! warn or enforce by default
+#   images:
+#     - glob: akseutap8registry.azurecr.io/library/tanzu-supply-chain/*-micropets-int*
+#   authorities:
+#     - static:
+#         action: fail #! pass or fail
+#     - key:
+#         data: |
+#           -----BEGIN PUBLIC KEY-----
+#           MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjV05QeCnt8pb9MNkUjVLiahQdtsm
+#           0HfwxT44L6QGO+xwqydyA9GazpyQLjEiXVjTkJ/9rXrpZoma1nejUWVtew==
+#           -----END PUBLIC KEY-----
+#     - key:
+#         secretRef:
+#           name: micropets-keypair
+#           namespace: micropets-dev #!secretref.namespace is invalid. If set, it should use the same namespace where the policy-controller was deployed
+---
+#! Export the public key of the signature
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretTemplate
+metadata:
+  name: micropets-cosign-keypair-public
+  namespace: cosign-system
+spec:
+  inputResources:
+    - name: cosign
+      ref:
+        apiVersion: v1
+        kind: Secret
+        name: micropets-cosign-keypair
+  template:
+    data:
+      cosign.pub: $(.cosign.data.cosign\.pub)
+---
 apiVersion: policy.sigstore.dev/v1beta1
 kind: ClusterImagePolicy
 metadata:
@@ -27,12 +67,8 @@ spec:
     - static:
         action: fail #! pass or fail
     - key:
-        data: |
-          -----BEGIN PUBLIC KEY-----
-          MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjV05QeCnt8pb9MNkUjVLiahQdtsm
-          0HfwxT44L6QGO+xwqydyA9GazpyQLjEiXVjTkJ/9rXrpZoma1nejUWVtew==
-          -----END PUBLIC KEY-----
-    #! - key:
-    #!    secretRef:
-    #!      name: micropets-keypair
-    #!      namespace: micropets-dev #!secretref.namespace is invalid. If set, it should use the same namespace where the policy-controller was deployed
+        secretRef:
+          name: micropets-cosign-keypair-public
+          namespace: cosign-system
+---
+
