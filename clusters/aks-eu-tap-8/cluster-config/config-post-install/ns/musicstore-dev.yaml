@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    param.nsp.tap/supply_chain_service_account.secrets: '["app-registry","git-ssh","registries-credentials","github-workload-token"]'
-    param.nsp.tap/supply_chain_service_account.imagePullSecrets: '["app-registry", "tap-install-registry-dockerconfig"]'
+  #!  param.nsp.tap/supply_chain_service_account.secrets: '["app-registry","git-ssh","registries-credentials","github-workload-token"]'
+  #!  param.nsp.tap/supply_chain_service_account.imagePullSecrets: '["app-registry", "tap-install-registry-dockerconfig"]'
   labels:
     apps.tanzu.vmware.com/tap-ns: ""
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs

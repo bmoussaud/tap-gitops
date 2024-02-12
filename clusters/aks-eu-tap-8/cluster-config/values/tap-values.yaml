@@ -71,17 +71,19 @@ tap_install:
       #default_parameters:
       #! https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.7/tap/namespace-provisioner-use-case4.html#update-serviceaccount-for-a-specific-namespace-5
       #! TODO: use a full gitops approach
-      #! Now annotations on the ns will set the secret on the supply_chain_sa (default in my case)
-      #!  supply_chain_service_account:
-      #!    secrets:
-      #!      - app-registry
-      #!      - git-ssh
-      #!      - registries-credentials
-      #!      - github-workload-token
-      #!    imagePullSecrets:
-      #!      - app-registry
-      #!      - tap-install-registry-dockerconfig
-     
+      #! Stop using annotations on the ns will set the secret on the supply_chain_sa (default in my case)
+      supply_chain_service_account:
+        secrets:
+          - app-registry
+          - git-ssh
+          - registries-credentials
+          - github-workload-token
+          - micropets-cosign-keypair
+          - micropets-other-cosign-keypair
+        imagePullSecrets:
+          - app-registry
+          - tap-install-registry-dockerconfig
+
       #! on full & iterate profiles limits can fail build in the supply chain.
       #! limits:
       #!  default:

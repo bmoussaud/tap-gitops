@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    param.nsp.tap/supply_chain_service_account.secrets: '["app-registry","git-ssh","registries-credentials","github-workload-token","micropets-cosign-keypair","micropets-other-cosign-keypair"]'
-    param.nsp.tap/supply_chain_service_account.imagePullSecrets: '["app-registry", "tap-install-registry-dockerconfig"]'
+  #!  param.nsp.tap/supply_chain_service_account.secrets: '["app-registry","git-ssh","registries-credentials","github-workload-token","micropets-cosign-keypair","micropets-other-cosign-keypair"]'
+  #!  param.nsp.tap/supply_chain_service_account.imagePullSecrets: '["app-registry", "tap-install-registry-dockerconfig"]'
   labels:
     apps.tanzu.vmware.com/tap-ns: ""
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs
     tap.tanzu.vmware.com/databases: postgres
     tap.tanzu.vmware.com/env: int
-    #! policy.sigstore.dev/include: "true"
+    policy.sigstore.dev/include: "true"
   name: micropets-int
