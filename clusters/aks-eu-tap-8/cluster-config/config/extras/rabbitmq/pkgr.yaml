@@ -11,4 +11,4 @@ metadata:
 spec:
   fetch:
     imgpkgBundle:      
-      image: #@ "{}/p-rabbitmq-for-kubernetes/tanzu-rabbitmq-package-repos:{}".format("akseutap8registry.azurecr.io", "1.5.3")
+      image: #@ "{}/p-rabbitmq-for-kubernetes/tanzu-rabbitmq-package-repo:{}".format("akseutap8registry.azurecr.io", "1.5.3")
