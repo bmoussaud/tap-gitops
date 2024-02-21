@@ -1,0 +1,50 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:base64", "base64")
+#@ load("@ytt:json", "json")
+---
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGateway
+metadata:
+  name: micropets-gateway
+  labels:
+    tanzu.app.live.view: "true"
+    tanzu.app.live.view.application.actuator.port: "8090"
+    tanzu.app.live.view.application.flavours: spring-boot_spring-cloud-gateway
+spec:
+  count: 1
+  api:
+    title: My Micropets APIs
+    description: Lots of new exciting APIs for you to use for the micropets application.
+    version: 0.1.0
+  server:
+    tls:
+      - hosts:
+          - #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+        secretName: micropets-gateway-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: micropets-gateway
+spec:
+  commonName: #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+  dnsNames:
+    - #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+  issuerRef:
+    name: #@ data.values.tap_values.ingress_issuer
+    kind: ClusterIssuer
+  secretName: micropets-gateway-tls
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: micropets-gateway-httpproxy
+spec:
+  virtualhost:
+    fqdn: #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+      - name: micropets-gateway
+        port: 443
