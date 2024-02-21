@@ -19,7 +19,7 @@ spec:
   server:
     tls:
       - hosts:
-          - #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+          -  #@ "gateway-" +data.values.env+ "."+data.values.tap_values.shared.ingress_domain
         secretName: micropets-gateway-tls
 ---
 apiVersion: cert-manager.io/v1
@@ -27,11 +27,11 @@ kind: Certificate
 metadata:
   name: micropets-gateway
 spec:
-  commonName: #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+  commonName: #@ "gateway-" +data.values.env + "."+data.values.tap_values.shared.ingress_domain
   dnsNames:
-    - #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+    -  #@ "gateway-" +data.values.env + "."+data.values.tap_values.shared.ingress_domain
   issuerRef:
-    name: #@ data.values.tap_values.ingress_issuer
+    name: #@ data.values.tap_values.shared.ingress_issuer
     kind: ClusterIssuer
   secretName: micropets-gateway-tls
 ---
