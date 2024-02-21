@@ -41,7 +41,7 @@ metadata:
   name: micropets-gateway-httpproxy
 spec:
   virtualhost:
-    fqdn: #@ "gateway-" +data.values.env + "."+data.values.tap_values.ingress_domain
+    fqdn: #@ "gateway-" +data.values.env + "."+data.values.tap_values.shared.ingress_domain
     tls:
       passthrough: true
   tcpproxy:
