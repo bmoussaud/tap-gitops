@@ -169,12 +169,12 @@ rules:
   - apiGroups: [scanning.apps.tanzu.vmware.com]
     resources: ["imagescans", "sourcescans"]
     verbs: ["*"]
-  - apiGroup: [tanzu.vmware.com]
+  - apiGroups: [tanzu.vmware.com]
     resources:
       [
         "springcloudgateways",
         "springcloudgatewayrouteconfigs",
-        "springcloudgatewaymappings"
+        "springcloudgatewaymappings",
       ]
     verbs: ["*"]
   - apiGroups: ["", "networking.k8s.io", "apps", "extensions", "batch"]
