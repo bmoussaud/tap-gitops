@@ -5,5 +5,5 @@ metadata:
     apps.tanzu.vmware.com/tap-ns: ""
     tap.tanzu.vmware.com/languages: java_golang_angular_nodejs
     tap.tanzu.vmware.com/databases: postgres
-    tap.tanzu.vmware.com/env: music
+    tap.tanzu.vmware.com/env: dev
   name: musicstore-dev
